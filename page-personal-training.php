@@ -10,8 +10,9 @@ get_header();
     <div class="hero-bg" id="heroBgEl" aria-hidden="true">
       <img src="<?php echo strata_theme_image('strata_pt_hero_bg', '/assets/images/6.webp'); ?>" alt="" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;">
     </div>
-    <div class="hero-overlay"></div>
+    <div class="hero-overlay" id="heroOverlay"></div>
     <div class="hero-blend"></div>
+    <div class="hero-light-wash" id="heroLightWash"></div>
 
     <div class="hero-reveal-img" id="heroRevealImg">
       <img src="<?php echo strata_theme_image('strata_pt_hero_reveal', '/assets/images/10.webp'); ?>" alt="Athlete training" width="1280" height="720" decoding="async" loading="lazy" />
@@ -56,7 +57,7 @@ get_header();
   </section>
 
   <!-- WHAT'S INCLUDED SECTION -->
-  <section class="section" style="padding: 6rem 0; background-color: rgba(0,0,0,0.2);">
+  <section class="section" style="padding: 6rem 0; background-color: var(--color-surface);">
     <div class="container">
       <div class="grid grid-2" style="gap: 6rem; align-items: start;">
 
@@ -68,7 +69,7 @@ get_header();
           </h2>
 
           <div style="display: flex; flex-direction: column; gap: 2.5rem;" data-stagger data-delay="100">
-            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2.5rem;">
+            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 2.5rem;">
               <div style="font-family: var(--font-display); color: var(--color-red); font-size: 1.1rem; font-weight: 700;">01</div>
               <div>
                 <h4 style="font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.75rem;"><?php echo get_theme_mod('strata_pt_item1_title', 'Customized Training Blocks'); ?></h4>
@@ -76,7 +77,7 @@ get_header();
               </div>
             </div>
 
-            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2.5rem;">
+            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 2.5rem;">
               <div style="font-family: var(--font-display); color: var(--color-red); font-size: 1.1rem; font-weight: 700;">02</div>
               <div>
                 <h4 style="font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.75rem;"><?php echo get_theme_mod('strata_pt_item2_title', 'Real-time Form Correction'); ?></h4>
@@ -84,7 +85,7 @@ get_header();
               </div>
             </div>
 
-            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2.5rem;">
+            <div style="display: flex; gap: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 2.5rem;">
               <div style="font-family: var(--font-display); color: var(--color-red); font-size: 1.1rem; font-weight: 700;">03</div>
               <div>
                 <h4 style="font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.75rem;"><?php echo get_theme_mod('strata_pt_item3_title', 'Regular Physical Assessments'); ?></h4>
@@ -103,7 +104,7 @@ get_header();
         </div>
 
         <!-- Right Side: Sticky Card -->
-        <div class="card" style="position: sticky; top: 120px; padding: 3rem; border: 1px solid rgba(255,255,255,0.05); background: linear-gradient(145deg, rgba(20,22,30,0.8), rgba(8,9,13,0.9)); aspect-ratio: 4/5; display: flex; flex-direction: column; justify-content: space-between;" data-reveal data-delay="200">
+        <div class="card" style="position: sticky; top: 120px; padding: 3rem; border: 1px solid rgba(0,0,0,0.06); background: linear-gradient(145deg, rgba(232,228,222,0.95), rgba(240,237,232,0.9)); aspect-ratio: 4/5; display: flex; flex-direction: column; justify-content: space-between;" data-reveal data-delay="200">
           <!-- Background accent glow -->
           <div style="position: absolute; top: -20%; left: -20%; width: 70%; height: 70%; background: radial-gradient(circle, rgba(211,21,69,0.15) 0%, transparent 70%); pointer-events: none; z-index: 0;"></div>
 
@@ -118,7 +119,7 @@ get_header();
             </h3>
           </div>
 
-          <div style="position: relative; z-index: 1; display: flex; justify-content: space-between; font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase;">
+          <div style="position: relative; z-index: 1; display: flex; justify-content: space-between; font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(0,0,0,0.35); text-transform: uppercase;">
             <span><?php echo get_theme_mod('strata_pt_card_bottom_left', 'HONG KONG'); ?></span>
             <span><?php echo get_theme_mod('strata_pt_card_bottom_right', '3 MONTH MIN.'); ?></span>
           </div>
@@ -146,7 +147,7 @@ get_header();
       </div>
 
       <!-- Pricing Box -->
-      <div class="card" style="padding: var(--spacing-lg); border: 1px solid rgba(255,255,255,0.05); background: rgba(15,17,23,0.6);" data-reveal>
+      <div class="card" style="padding: var(--spacing-lg); border: 1px solid rgba(0,0,0,0.06); background: rgba(232,228,222,0.7);" data-reveal>
         <div class="grid grid-2" style="gap: var(--spacing-lg); align-items: center;">
           <div>
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase; margin-bottom: 1rem; display: block;"><?php echo get_theme_mod('strata_pt_inv_box_label', 'PERSONAL TRAINING'); ?></span>
@@ -157,11 +158,11 @@ get_header();
 
           <!-- Tiers list -->
           <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 1.25rem;">
               <span style="font-family: var(--font-display); font-weight: 700; font-size: 1.25rem;"><?php echo get_theme_mod('strata_pt_tier1_name', 'TIER 01'); ?></span>
               <span style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--color-text-dim); letter-spacing: 0.1em;"><?php echo get_theme_mod('strata_pt_tier1_freq', '2x / WEEK'); ?></span>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.06); padding-bottom: 1.25rem;">
               <span style="font-family: var(--font-display); font-weight: 700; font-size: 1.25rem;"><?php echo get_theme_mod('strata_pt_tier2_name', 'TIER 02'); ?></span>
               <span style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--color-text-dim); letter-spacing: 0.1em;"><?php echo get_theme_mod('strata_pt_tier2_freq', '3x / WEEK'); ?></span>
             </div>
@@ -176,7 +177,7 @@ get_header();
   </section>
 
   <!-- THE PROCESS SECTION -->
-  <section class="section" style="padding: 6rem 0 10rem; background-color: rgba(0,0,0,0.2);">
+  <section class="section" style="padding: 6rem 0 10rem; background-color: var(--color-surface);">
     <div class="container">
       <div style="margin-bottom: 5rem;" data-reveal>
         <span class="eyebrow"><?php echo get_theme_mod('strata_pt_proc_eyebrow', '— THE PROCESS'); ?></span>
@@ -186,19 +187,19 @@ get_header();
       </div>
 
       <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem;" data-stagger data-delay="100">
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 2rem;">
           <span style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-red); margin-bottom: 1.5rem; display: block; font-weight: 700;">01</span>
           <h3 style="font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: -0.01em;"><?php echo get_theme_mod('strata_pt_proc_step1_title', 'Consultation & Assessment'); ?></h3>
           <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6;"><?php echo get_theme_mod('strata_pt_proc_step1_desc', 'A 30-minute deep dive into your training history, injury profile, and absolute goals, followed by a movement screening.'); ?></p>
         </div>
 
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 2rem;">
           <span style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-red); margin-bottom: 1.5rem; display: block; font-weight: 700;">02</span>
           <h3 style="font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: -0.01em;"><?php echo get_theme_mod('strata_pt_proc_step2_title', 'Onboarding'); ?></h3>
           <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6;"><?php echo get_theme_mod('strata_pt_proc_step2_desc', 'You will be integrated into our systems. We build your initial physiological profile and design phase one of your training macrocycle.'); ?></p>
         </div>
 
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+        <div style="border-top: 1px solid rgba(0,0,0,0.08); padding-top: 2rem;">
           <span style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-red); margin-bottom: 1.5rem; display: block; font-weight: 700;">03</span>
           <h3 style="font-family: var(--font-display); font-size: 1.5rem; text-transform: uppercase; margin-bottom: 1rem; letter-spacing: -0.01em;"><?php echo get_theme_mod('strata_pt_proc_step3_title', 'Active Client'); ?></h3>
           <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6;"><?php echo get_theme_mod('strata_pt_proc_step3_desc', 'Execution begins. You show up, put in the work under strict supervision, and we track the data to ensure constant progression.'); ?></p>

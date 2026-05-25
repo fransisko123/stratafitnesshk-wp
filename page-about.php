@@ -10,8 +10,9 @@ get_header();
     <div class="hero-bg" id="heroBgEl" aria-hidden="true">
       <img src="<?php echo strata_theme_image('strata_ab_hero_bg', '/assets/images/2.webp'); ?>" alt="" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;">
     </div>
-    <div class="hero-overlay"></div>
+    <div class="hero-overlay" id="heroOverlay"></div>
     <div class="hero-blend"></div>
+    <div class="hero-light-wash" id="heroLightWash"></div>
 
     <div class="hero-reveal-img" id="heroRevealImg">
       <img src="<?php echo strata_theme_image('strata_ab_hero_reveal', '/assets/images/3.webp'); ?>" alt="Athlete training" width="1280" height="720" decoding="async" loading="lazy" />
