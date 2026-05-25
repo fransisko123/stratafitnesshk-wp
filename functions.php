@@ -458,6 +458,168 @@ function stratafitness_customize_register($wp_customize) {
     $add_text('strata_nc_cta', 'strata_nc_cta_secondary_text', __('Secondary Button Text', 'stratafitness'), 'EXPLORE PERSONAL TRAINING');
 
     // ================================================================
+    //  PANEL: Homepage
+    // ================================================================
+    $wp_customize->add_panel('strata_home_panel', array(
+        'title'    => __('Homepage', 'stratafitness'),
+        'priority' => 129,
+    ));
+
+    // --- Hero Section ---
+    $wp_customize->add_section('strata_home_hero', array('title' => __('Hero Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_image('strata_home_hero', 'strata_home_hero_bg', __('Hero Background Image', 'stratafitness'));
+    $add_image('strata_home_hero', 'strata_home_hero_reveal', __('Hero Reveal Image', 'stratafitness'));
+    $add_text('strata_home_hero', 'strata_home_hero_eyebrow_left', __('Eyebrow Left', 'stratafitness'), 'Elite Performance');
+    $add_text('strata_home_hero', 'strata_home_hero_eyebrow_right', __('Eyebrow Right', 'stratafitness'), 'Coaching · Hong Kong');
+    $add_text('strata_home_hero', 'strata_home_hero_headline_left', __('Headline Left', 'stratafitness'), 'We Build');
+    $add_text('strata_home_hero', 'strata_home_hero_headline_right', __('Headline Right', 'stratafitness'), 'Athletes.');
+    $add_text('strata_home_hero', 'strata_home_hero_sub_left', __('Sub Left', 'stratafitness'), 'Competitive athletes and driven professionals.');
+    $add_text('strata_home_hero', 'strata_home_hero_sub_right', __('Sub Right', 'stratafitness'), 'We engineer performance not workouts.');
+
+    // --- Mandate Section ---
+    $wp_customize->add_section('strata_home_mandate', array('title' => __('Mandate Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_mandate', 'strata_home_mandate_eyebrow', __('Eyebrow', 'stratafitness'), '— Our Mandate');
+    $add_text('strata_home_mandate', 'strata_home_mandate_headline_1', __('Headline Line 1', 'stratafitness'), 'ENGINEER');
+    $add_text('strata_home_mandate', 'strata_home_mandate_headline_2', __('Headline Line 2', 'stratafitness'), 'Performance.');
+    $add_textarea('strata_home_mandate', 'strata_home_mandate_desc', __('Description', 'stratafitness'), 'For competitive athletes and driven professionals based in Hong Kong and beyond. We build superior athletes through individualized programming, ruthless accountability, and a science-led methodology — not template programs and entertainment.');
+    $add_text('strata_home_mandate', 'strata_home_mandate_cta_text', __('CTA Button Text', 'stratafitness'), 'APPLY FOR COACHING');
+    $add_url('strata_home_mandate', 'strata_home_mandate_cta_url', __('CTA Button URL', 'stratafitness'), '#apply');
+    $add_text('strata_home_mandate', 'strata_home_mandate_outline_text', __('Outline Button Text', 'stratafitness'), 'OUR DISCIPLINES');
+    $add_url('strata_home_mandate', 'strata_home_mandate_outline_url', __('Outline Button URL', 'stratafitness'), '#services');
+
+    // --- Credentials Section ---
+    $wp_customize->add_section('strata_home_creds', array('title' => __('Credentials Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_creds', 'strata_home_creds_eyebrow', __('Eyebrow', 'stratafitness'), '— Credentials');
+    $add_text('strata_home_creds', 'strata_home_creds_title', __('Title', 'stratafitness'), 'Educated by the Best.');
+    $add_textarea('strata_home_creds', 'strata_home_creds_sub', __('Subtitle', 'stratafitness'), 'Certifications from the institutions that set the global standard for strength, mobility, sport, and nutrition.');
+
+    // --- Services Header ---
+    $wp_customize->add_section('strata_home_services', array('title' => __('Services Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_services', 'strata_home_services_eyebrow', __('Eyebrow', 'stratafitness'), '— Three Paths');
+    $add_text('strata_home_services', 'strata_home_services_headline_1', __('Headline Line 1', 'stratafitness'), 'ONE');
+    $add_text('strata_home_services', 'strata_home_services_headline_2', __('Headline Line 2', 'stratafitness'), 'Standard.');
+    $add_textarea('strata_home_services', 'strata_home_services_desc', __('Description', 'stratafitness'), 'Every Strata service operates under a single principle: engineer the athlete, don\'t entertain them. Choose your path — every one is built on data, intent, and measurable outcomes.');
+
+    // --- Service Card: Personal Training ---
+    $wp_customize->add_section('strata_home_svc_pt', array('title' => __('Service Card: Personal Training', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_image('strata_home_svc_pt', 'strata_home_svc_pt_bg', __('Card Background Image', 'stratafitness'));
+    $add_text('strata_home_svc_pt', 'strata_home_svc_pt_tag', __('Tag Number', 'stratafitness'), '01');
+    $add_text('strata_home_svc_pt', 'strata_home_svc_pt_title', __('Title', 'stratafitness'), 'In-Person Personal Training');
+    $add_textarea('strata_home_svc_pt', 'strata_home_svc_pt_desc', __('Description', 'stratafitness'), 'One-on-one coaching at our gym in Central, HK. Expert guidance, real-time feedback, and direct supervision for maximum results.');
+    $add_text('strata_home_svc_pt', 'strata_home_svc_pt_cta_text', __('CTA Button Text', 'stratafitness'), 'Book Assessment');
+    $add_url('strata_home_svc_pt', 'strata_home_svc_pt_cta_url', __('CTA Button URL', 'stratafitness'), 'https://go.stratafitnesshk.com/30-min-consult-assessment');
+    $add_text('strata_home_svc_pt', 'strata_home_svc_pt_learn_text', __('Learn More Text', 'stratafitness'), 'Learn More');
+    $add_url('strata_home_svc_pt', 'strata_home_svc_pt_learn_url', __('Learn More URL', 'stratafitness'), '/personal-training/');
+
+    // --- Service Card: Remote Coaching ---
+    $wp_customize->add_section('strata_home_svc_rc', array('title' => __('Service Card: Remote Coaching', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_image('strata_home_svc_rc', 'strata_home_svc_rc_bg', __('Card Background Image', 'stratafitness'));
+    $add_text('strata_home_svc_rc', 'strata_home_svc_rc_tag', __('Tag Number', 'stratafitness'), '02');
+    $add_text('strata_home_svc_rc', 'strata_home_svc_rc_title', __('Title', 'stratafitness'), 'Remote Coaching');
+    $add_textarea('strata_home_svc_rc', 'strata_home_svc_rc_desc', __('Description', 'stratafitness'), 'Complete programming tailored to your goals, capacity, and lifestyle. Includes weekly coaching, form reviews, and real-time program adjustments.');
+    $add_text('strata_home_svc_rc', 'strata_home_svc_rc_cta_text', __('CTA Button Text', 'stratafitness'), 'Book a Call');
+    $add_url('strata_home_svc_rc', 'strata_home_svc_rc_cta_url', __('CTA Button URL', 'stratafitness'), 'https://go.stratafitnesshk.com/remotecoachingcall');
+    $add_text('strata_home_svc_rc', 'strata_home_svc_rc_learn_text', __('Learn More Text', 'stratafitness'), 'Learn More');
+    $add_url('strata_home_svc_rc', 'strata_home_svc_rc_learn_url', __('Learn More URL', 'stratafitness'), '/remote-coaching/');
+
+    // --- Service Card: Nutrition Coaching ---
+    $wp_customize->add_section('strata_home_svc_nc', array('title' => __('Service Card: Nutrition Coaching', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_image('strata_home_svc_nc', 'strata_home_svc_nc_bg', __('Card Background Image', 'stratafitness'));
+    $add_text('strata_home_svc_nc', 'strata_home_svc_nc_tag', __('Tag Number', 'stratafitness'), '03');
+    $add_text('strata_home_svc_nc', 'strata_home_svc_nc_title', __('Title', 'stratafitness'), 'Nutrition Coaching');
+    $add_textarea('strata_home_svc_nc', 'strata_home_svc_nc_desc', __('Description', 'stratafitness'), 'Data-driven nutritional periodization. Optimized for body composition, recovery, and peak performance at every phase of training.');
+    $add_text('strata_home_svc_nc', 'strata_home_svc_nc_cta_text', __('CTA Button Text', 'stratafitness'), 'Book Discovery Call');
+    $add_url('strata_home_svc_nc', 'strata_home_svc_nc_cta_url', __('CTA Button URL', 'stratafitness'), 'https://go.stratafitnesshk.com/nutrition-discovery-call');
+    $add_text('strata_home_svc_nc', 'strata_home_svc_nc_learn_text', __('Learn More Text', 'stratafitness'), 'Learn More');
+    $add_url('strata_home_svc_nc', 'strata_home_svc_nc_learn_url', __('Learn More URL', 'stratafitness'), '/nutrition-coaching/');
+
+    // --- Process Section Header ---
+    $wp_customize->add_section('strata_home_process', array('title' => __('Process Section Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_process', 'strata_home_process_eyebrow', __('Eyebrow', 'stratafitness'), '— The Process');
+    $add_text('strata_home_process', 'strata_home_process_headline_1', __('Headline Line 1', 'stratafitness'), 'ASSESSMENT');
+    $add_text('strata_home_process', 'strata_home_process_headline_2', __('Headline Line 2', 'stratafitness'), 'execution.');
+    $add_textarea('strata_home_process', 'strata_home_process_desc', __('Header Description', 'stratafitness'), 'Every athlete enters the same three-phase architecture. Select a service to see exactly how it unfolds.');
+    $add_text('strata_home_process', 'strata_home_process_tab_1', __('Tab 1 Label', 'stratafitness'), 'PERSONAL TRAINING');
+    $add_text('strata_home_process', 'strata_home_process_tab_2', __('Tab 2 Label', 'stratafitness'), 'REMOTE COACHING');
+    $add_text('strata_home_process', 'strata_home_process_tab_3', __('Tab 3 Label', 'stratafitness'), 'NUTRITION COACHING');
+
+    // --- Process Steps: Personal Training ---
+    $wp_customize->add_section('strata_home_process_pt', array('title' => __('Process Steps: Personal Training', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_process_pt', 'strata_home_process_pt_s1_title', __('Step 1 Title', 'stratafitness'), 'CONSULTATION');
+    $add_textarea('strata_home_process_pt', 'strata_home_process_pt_s1_desc', __('Step 1 Description', 'stratafitness'), 'A 30-minute deep-dive into your training history, injury record, lifestyle constraints, and the outcome you actually want. Movement screening included. This is where your prescription begins.');
+    $add_text('strata_home_process_pt', 'strata_home_process_pt_s2_title', __('Step 2 Title', 'stratafitness'), 'PROGRAM DESIGN');
+    $add_textarea('strata_home_process_pt', 'strata_home_process_pt_s2_desc', __('Step 2 Description', 'stratafitness'), 'Physiological profiling, baseline metrics, and full macrocycle design. Your first training block is built and periodized before you ever step on the floor. No templates.');
+    $add_text('strata_home_process_pt', 'strata_home_process_pt_s3_title', __('Step 3 Title', 'stratafitness'), 'COACHED EXECUTION');
+    $add_textarea('strata_home_process_pt', 'strata_home_process_pt_s3_desc', __('Step 3 Description', 'stratafitness'), 'Supervised in-person sessions with real-time mechanical feedback and load management. Programming adapts to your readiness, recovery, and trajectory — week after week.');
+
+    // --- Process Steps: Remote Coaching ---
+    $wp_customize->add_section('strata_home_process_rc', array('title' => __('Process Steps: Remote Coaching', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_process_rc', 'strata_home_process_rc_s1_title', __('Step 1 Title', 'stratafitness'), 'DISCOVERY CALL');
+    $add_textarea('strata_home_process_rc', 'strata_home_process_rc_s1_desc', __('Step 1 Description', 'stratafitness'), 'A 30-minute call to assess athlete readiness, equipment access, and training discipline. Remote coaching demands self-direction — we confirm it before we start.');
+    $add_text('strata_home_process_rc', 'strata_home_process_rc_s2_title', __('Step 2 Title', 'stratafitness'), 'ONBOARDING');
+    $add_textarea('strata_home_process_rc', 'strata_home_process_rc_s2_desc', __('Step 2 Description', 'stratafitness'), 'Detailed intake questionnaire, baseline metric collection, app/platform setup, and your Week 1 program delivered before Day 1. You know exactly what\'s coming.');
+    $add_text('strata_home_process_rc', 'strata_home_process_rc_s3_title', __('Step 3 Title', 'stratafitness'), 'WEEKLY LOOP');
+    $add_textarea('strata_home_process_rc', 'strata_home_process_rc_s3_desc', __('Step 3 Description', 'stratafitness'), 'Train. Submit footage. Check-in. We review readiness, performance data, and recovery markers every seven days. Programming evolves accordingly — measured, intentional.');
+
+    // --- Process Steps: Nutrition Coaching ---
+    $wp_customize->add_section('strata_home_process_nc', array('title' => __('Process Steps: Nutrition Coaching', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_process_nc', 'strata_home_process_nc_s1_title', __('Step 1 Title', 'stratafitness'), 'BASELINE ASSESSMENT');
+    $add_textarea('strata_home_process_nc', 'strata_home_process_nc_s1_desc', __('Step 1 Description', 'stratafitness'), 'Body composition review, dietary history, health markers, and performance goals. We baseline everything before prescribing anything — no guesswork, no assumptions.');
+    $add_text('strata_home_process_nc', 'strata_home_process_nc_s2_title', __('Step 2 Title', 'stratafitness'), 'NUTRITIONAL ARCHITECTURE');
+    $add_textarea('strata_home_process_nc', 'strata_home_process_nc_s2_desc', __('Step 2 Description', 'stratafitness'), 'Calorie targets, macro ratios, and meal frameworks built to your physiology and training load. Not a rigid meal plan — a practical system that integrates with your life.');
+    $add_text('strata_home_process_nc', 'strata_home_process_nc_s3_title', __('Step 3 Title', 'stratafitness'), 'PERIODIZATION');
+    $add_textarea('strata_home_process_nc', 'strata_home_process_nc_s3_desc', __('Step 3 Description', 'stratafitness'), 'Nutrition phases aligned to your training blocks. Performance, maintenance, and recomposition cycles executed with intent — not intuition. Weekly tracking review included.');
+
+    // --- Philosophy Section ---
+    $wp_customize->add_section('strata_home_philosophy', array('title' => __('Philosophy Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_image('strata_home_philosophy', 'strata_home_philosophy_bg', __('Background Image', 'stratafitness'));
+    $add_text('strata_home_philosophy', 'strata_home_philosophy_eyebrow', __('Eyebrow', 'stratafitness'), '— Our Philosophy');
+    $add_text('strata_home_philosophy', 'strata_home_philosophy_headline_1', __('Headline Line 1', 'stratafitness'), 'Intensity.');
+    $add_text('strata_home_philosophy', 'strata_home_philosophy_headline_2', __('Headline Line 2', 'stratafitness'), 'Consistency.');
+    $add_text('strata_home_philosophy', 'strata_home_philosophy_headline_3', __('Headline Line 3', 'stratafitness'), 'Precision.');
+    $add_textarea('strata_home_philosophy', 'strata_home_philosophy_p1', __('Paragraph 1', 'stratafitness'), 'We don\'t do generic workouts. We engineer performance. Our approach is rooted in sports science — relentlessly focused on progressive overload, strict mechanics, and absolute accountability.');
+    $add_textarea('strata_home_philosophy', 'strata_home_philosophy_p2', __('Paragraph 2', 'stratafitness'), 'Whether you\'re a competitive athlete or an executive demanding peak physical condition, our standard remains exactly the same.');
+    $add_text('strata_home_philosophy', 'strata_home_philosophy_cta_text', __('CTA Button Text', 'stratafitness'), 'Read Our Story');
+    $add_url('strata_home_philosophy', 'strata_home_philosophy_cta_url', __('CTA Button URL', 'stratafitness'), '/about/');
+
+    // --- Testimonials Header ---
+    $wp_customize->add_section('strata_home_testimonials', array('title' => __('Testimonials Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_testimonials', 'strata_home_testimonials_eyebrow', __('Eyebrow', 'stratafitness'), '— The Results');
+    $add_text('strata_home_testimonials', 'strata_home_testimonials_headline', __('Headline', 'stratafitness'), 'Voices from the floor.');
+    $add_textarea('strata_home_testimonials', 'strata_home_testimonials_sub', __('Subtitle', 'stratafitness'), 'Athletes. One standard. Real words from clients who turned up — and turned around.');
+
+    // --- Testimonial Cards (7 cards) ---
+    $testimonials_defaults = array(
+        array('quote' => 'Excellent strength training.', 'msg' => '"Such a positive experience with Jonathan. He guided me through excellent strength training workouts, and I\'m so proud of the progress I made."', 'client' => 'Sabrina Anderson', 'label' => 'Personal Training'),
+        array('quote' => 'Real results — finally.', 'msg' => '"Jon helped resolve my chronic low back pain, and I\'ve felt significantly stronger since. His warm-ups are exceptionally well thought out."', 'client' => 'Janet', 'label' => 'Personal Training'),
+        array('quote' => 'Stronger. No injuries.', 'msg' => '"I\'ve been training with Jon for over a year and have never felt stronger without getting injured. I now fully trust him with both my training and my health."', 'client' => 'Hind El Hathout', 'label' => 'Personal Training'),
+        array('quote' => 'Holistic & motivating.', 'msg' => '"Jon has been my trainer for over a year, and I continue to see steady progress. His positive and motivating approach makes training enjoyable without unnecessary pressure."', 'client' => 'Michelle', 'label' => 'Personal Training'),
+        array('quote' => 'Structure that actually works.', 'msg' => '"Jon\'s patience, attention to detail, and ability to demonstrate and refine movements stood out. I highly recommend Coach Jon Miller."', 'client' => 'Walter', 'label' => 'Personal Training'),
+        array('quote' => 'Individualized from day one.', 'msg' => '"Jon takes a highly personalized approach and creates consistently engaging programs. He also adapts training effectively around injuries to support recovery."', 'client' => 'Yasmin', 'label' => 'Personal Training'),
+        array('quote' => 'PRs at 43. No plateaus.', 'msg' => '"I\'m stronger than ever at 43, hitting PRs across multiple lifts. His varied and engaging programming has made training enjoyable and consistent."', 'client' => 'Avishay', 'label' => 'Remote Coaching'),
+    );
+
+    foreach ($testimonials_defaults as $i => $t) {
+        $n = $i + 1;
+        $wp_customize->add_section("strata_home_t_{$n}", array('title' => sprintf(__('Testimonial %d', 'stratafitness'), $n), 'panel' => 'strata_home_panel'));
+        $add_image("strata_home_t_{$n}", "strata_home_t_{$n}_bg", __('Background Image', 'stratafitness'));
+        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_quote", __('Quote Label', 'stratafitness'), $t['quote']);
+        $add_textarea("strata_home_t_{$n}", "strata_home_t_{$n}_msg", __('Message', 'stratafitness'), $t['msg']);
+        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_client", __('Client Name', 'stratafitness'), $t['client']);
+        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_label", __('Client Label', 'stratafitness'), $t['label']);
+    }
+
+    // --- Apply Section ---
+    $wp_customize->add_section('strata_home_apply', array('title' => __('Apply Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
+    $add_text('strata_home_apply', 'strata_home_apply_eyebrow', __('Eyebrow', 'stratafitness'), '— Get In Touch');
+    $add_text('strata_home_apply', 'strata_home_apply_headline_1', __('Headline Line 1', 'stratafitness'), 'APPLY FOR');
+    $add_text('strata_home_apply', 'strata_home_apply_headline_2', __('Headline Line 2', 'stratafitness'), 'coaching.');
+    $add_textarea('strata_home_apply', 'strata_home_apply_desc', __('Description', 'stratafitness'), 'Tell us where you are, what you want, and how serious you are. We\'ll respond within 24 hours.');
+    $add_text('strata_home_apply', 'strata_home_apply_direct_label', __('Direct Label', 'stratafitness'), 'DIRECT');
+    $add_text('strata_home_apply', 'strata_home_apply_direct_email', __('Direct Email', 'stratafitness'), 'jon@stratafitnesshk.com');
+    $add_text('strata_home_apply', 'strata_home_apply_submit_text', __('Submit Button Text', 'stratafitness'), 'Send Application');
+
+    // ================================================================
     //  PANEL: About Page
     // ================================================================
     $wp_customize->add_panel('strata_ab_panel', array(
@@ -493,6 +655,171 @@ function stratafitness_customize_register($wp_customize) {
 }
 add_action('customize_register', 'stratafitness_customize_register');
 
+// ── Register Testimonials Custom Post Type ──
+function stratafitness_register_testimonials() {
+    $labels = array(
+        'name'               => __('Testimonials', 'stratafitness'),
+        'singular_name'      => __('Testimonial', 'stratafitness'),
+        'add_new'            => __('Add New', 'stratafitness'),
+        'add_new_item'       => __('Add New Testimonial', 'stratafitness'),
+        'edit_item'          => __('Edit Testimonial', 'stratafitness'),
+        'new_item'           => __('New Testimonial', 'stratafitness'),
+        'view_item'          => __('View Testimonial', 'stratafitness'),
+        'search_items'       => __('Search Testimonials', 'stratafitness'),
+        'not_found'          => __('No testimonials found.', 'stratafitness'),
+        'not_found_in_trash' => __('No testimonials found in Trash.', 'stratafitness'),
+        'all_items'          => __('All Testimonials', 'stratafitness'),
+        'menu_name'          => __('Testimonials', 'stratafitness'),
+    );
+
+    $args = array(
+        'labels'              => $labels,
+        'public'              => false,
+        'publicly_queryable'  => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'show_in_rest'        => true,  // Gutenberg-friendly
+        'menu_position'       => 25,
+        'menu_icon'           => 'dashicons-format-quote',
+        'hierarchical'        => false,
+        'supports'            => array('title', 'thumbnail', 'page-attributes'),
+        'has_archive'         => false,
+        'rewrite'             => false,
+        'delete_with_user'    => false,
+    );
+
+    register_post_type('strata_testimonial', $args);
+}
+add_action('init', 'stratafitness_register_testimonials');
+
+// ── Testimonial Meta Boxes ──
+function stratafitness_testimonial_meta_boxes() {
+    add_meta_box(
+        'strata_testimonial_details',
+        __('Testimonial Details', 'stratafitness'),
+        'stratafitness_testimonial_meta_callback',
+        'strata_testimonial',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'stratafitness_testimonial_meta_boxes');
+
+function stratafitness_testimonial_meta_callback($post) {
+    wp_nonce_field('strata_testimonial_save', 'strata_testimonial_nonce');
+
+    $quote_label = get_post_meta($post->ID, '_strata_quote_label', true);
+    $message     = get_post_meta($post->ID, '_strata_message', true);
+    $client_name = get_post_meta($post->ID, '_strata_client_name', true);
+    $client_label = get_post_meta($post->ID, '_strata_client_label', true);
+    $avatar_text  = get_post_meta($post->ID, '_strata_avatar_text', true);
+    $rating       = get_post_meta($post->ID, '_strata_rating', true) ?: 5;
+    ?>
+    <style>
+        .strata-meta-field { margin-bottom: 16px; }
+        .strata-meta-field label { display: block; font-weight: 600; margin-bottom: 4px; color: #1d2327; }
+        .strata-meta-field input[type="text"],
+        .strata-meta-field textarea { width: 100%; }
+        .strata-meta-field textarea { resize: vertical; }
+        .strata-meta-field .helper { font-size: 12px; color: #646970; margin-top: 2px; }
+        .strata-meta-row { display: flex; gap: 16px; }
+        .strata-meta-row .strata-meta-field { flex: 1; }
+    </style>
+    <div class="strata-meta-row">
+        <div class="strata-meta-field">
+            <label for="strata_quote_label"><?php _e('Quote Label (short headline)', 'stratafitness'); ?></label>
+            <input type="text" id="strata_quote_label" name="strata_quote_label" value="<?php echo esc_attr($quote_label); ?>" maxlength="60" placeholder="e.g. Excellent strength training.">
+            <div class="helper"><?php _e('Short tagline shown above the stars. Max 60 chars.', 'stratafitness'); ?></div>
+        </div>
+        <div class="strata-meta-field">
+            <label for="strata_client_name"><?php _e('Client Name', 'stratafitness'); ?></label>
+            <input type="text" id="strata_client_name" name="strata_client_name" value="<?php echo esc_attr($client_name); ?>" placeholder="e.g. Sabrina Anderson">
+        </div>
+    </div>
+    <div class="strata-meta-row">
+        <div class="strata-meta-field">
+            <label for="strata_client_label"><?php _e('Client Label', 'stratafitness'); ?></label>
+            <input type="text" id="strata_client_label" name="strata_client_label" value="<?php echo esc_attr($client_label); ?>" placeholder="e.g. Personal Training">
+        </div>
+        <div class="strata-meta-field">
+            <label for="strata_avatar_text"><?php _e('Avatar Text', 'stratafitness'); ?></label>
+            <input type="text" id="strata_avatar_text" name="strata_avatar_text" value="<?php echo esc_attr($avatar_text); ?>" maxlength="3" placeholder="e.g. SA">
+            <div class="helper"><?php _e('Initials displayed in the avatar circle. Max 3 chars.', 'stratafitness'); ?></div>
+        </div>
+    </div>
+    <div class="strata-meta-field">
+        <label for="strata_message"><?php _e('Testimonial Message', 'stratafitness'); ?></label>
+        <textarea id="strata_message" name="strata_message" rows="4" placeholder="The full testimonial text..."><?php echo esc_textarea($message); ?></textarea>
+    </div>
+    <div class="strata-meta-field">
+        <label for="strata_rating"><?php _e('Star Rating (1-5)', 'stratafitness'); ?></label>
+        <input type="number" id="strata_rating" name="strata_rating" value="<?php echo esc_attr($rating); ?>" min="1" max="5" step="1" style="width: 80px;">
+    </div>
+    <?php
+}
+
+function stratafitness_testimonial_save($post_id) {
+    // Bail if autosaving
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    // Check nonce
+    if (!isset($_POST['strata_testimonial_nonce']) || !wp_verify_nonce($_POST['strata_testimonial_nonce'], 'strata_testimonial_save')) return;
+    // Check permissions
+    if (!current_user_can('edit_post', $post_id)) return;
+
+    $fields = array(
+        '_strata_quote_label'  => 'strata_quote_label',
+        '_strata_message'      => 'strata_message',
+        '_strata_client_name'  => 'strata_client_name',
+        '_strata_client_label' => 'strata_client_label',
+        '_strata_avatar_text'  => 'strata_avatar_text',
+    );
+
+    foreach ($fields as $meta_key => $post_key) {
+        if (isset($_POST[$post_key])) {
+            update_post_meta($post_id, $meta_key, sanitize_text_field(wp_unslash($_POST[$post_key])));
+        }
+    }
+
+    // Rating: integer 1-5
+    if (isset($_POST['strata_rating'])) {
+        $rating = min(5, max(1, (int) $_POST['strata_rating']));
+        update_post_meta($post_id, '_strata_rating', $rating);
+    }
+}
+add_action('save_post_strata_testimonial', 'stratafitness_testimonial_save');
+
+// ── Helper: fetch testimonials sorted by custom order ──
+function stratafitness_get_testimonials($limit = 7) {
+    $query = new WP_Query(array(
+        'post_type'      => 'strata_testimonial',
+        'posts_per_page' => $limit,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+        'no_found_rows'  => true,
+    ));
+
+    $testimonials = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post_id = get_the_ID();
+            $testimonials[] = array(
+                'id'           => $post_id,
+                'bg'           => get_the_post_thumbnail_url($post_id, 'medium_large') ?: '',
+                'quote'        => get_post_meta($post_id, '_strata_quote_label', true),
+                'msg'          => get_post_meta($post_id, '_strata_message', true),
+                'client'       => get_post_meta($post_id, '_strata_client_name', true),
+                'label'        => get_post_meta($post_id, '_strata_client_label', true),
+                'avatar'       => get_post_meta($post_id, '_strata_avatar_text', true),
+                'rating'       => (int) get_post_meta($post_id, '_strata_rating', true) ?: 5,
+            );
+        }
+        wp_reset_postdata();
+    }
+    return $testimonials;
+}
+
 // ── Helper: get theme mod image URL (returns default if not set) ──
 function strata_theme_image($setting, $default_rel_path) {
     $img_id = get_theme_mod($setting, '');
@@ -501,6 +828,16 @@ function strata_theme_image($setting, $default_rel_path) {
         if ($url) return $url;
     }
     return get_template_directory_uri() . $default_rel_path;
+}
+
+// ── Helper: get theme mod image URL with absolute URL fallback ──
+function strata_theme_image_url($setting, $default_url) {
+    $img_id = get_theme_mod($setting, '');
+    if ($img_id) {
+        $url = wp_get_attachment_url((int) $img_id);
+        if ($url) return $url;
+    }
+    return $default_url;
 }
 
 // ── Auto-create required pages on theme activation ──
