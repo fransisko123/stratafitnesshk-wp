@@ -55,11 +55,11 @@
         } else {
             // Fallback links if no menu is set
         ?>
-          <a href="<?php echo home_url('/'); ?>" class="nav-link">Home</a>
-          <a href="<?php echo home_url('/personal-training/'); ?>" class="nav-link">Personal Training</a>
-          <a href="<?php echo home_url('/remote-coaching/'); ?>" class="nav-link">Remote Coaching</a>
-          <a href="<?php echo home_url('/nutrition-coaching/'); ?>" class="nav-link">Nutrition Coaching</a>
-          <a href="<?php echo home_url('/about/'); ?>" class="nav-link">About</a>
+          <a href="<?php echo home_url('/'); ?>" class="nav-link"<?php echo is_front_page() ? ' aria-current="page"' : ''; ?>>Home</a>
+          <a href="<?php echo home_url('/personal-training/'); ?>" class="nav-link"<?php echo is_page('personal-training') ? ' aria-current="page"' : ''; ?>>Personal Training</a>
+          <a href="<?php echo home_url('/remote-coaching/'); ?>" class="nav-link"<?php echo is_page('remote-coaching') ? ' aria-current="page"' : ''; ?>>Remote Coaching</a>
+          <a href="<?php echo home_url('/nutrition-coaching/'); ?>" class="nav-link"<?php echo is_page('nutrition-coaching') ? ' aria-current="page"' : ''; ?>>Nutrition Coaching</a>
+          <a href="<?php echo home_url('/about/'); ?>" class="nav-link"<?php echo is_page('about') ? ' aria-current="page"' : ''; ?>>About</a>
         <?php } ?>
         <a href="<?php echo home_url('/#apply'); ?>" class="btn btn-primary mandate">
           APPLY
