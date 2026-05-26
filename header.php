@@ -1,6 +1,8 @@
 <?php
 /**
  * Header Template
+ *
+ * @package StrataFitness
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -9,17 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f0ede8">
 
-  <!-- Preconnects -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-
-  <!-- DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-
-  <!-- Preload LCP hero image (conditionally set per page) -->
   <?php if (is_front_page()) : ?>
-  <link rel="preload" as="image" href="<?php echo get_template_directory_uri(); ?>/assets/images/10.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="<?php echo esc_url(get_template_directory_uri() . '/assets/images/10.webp'); ?>" fetchpriority="high">
   <?php endif; ?>
 
   <?php wp_head(); ?>
@@ -28,18 +21,18 @@
 <body <?php body_class(); ?>>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-dark" id="main-nav">
+  <nav class="navbar navbar-dark" id="main-nav" aria-label="<?php esc_attr_e('Main navigation', 'stratafitness'); ?>">
     <div class="container nav-inner">
-      <a href="<?php echo home_url('/'); ?>" class="logo" aria-label="Strata Fitness Home">
+      <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="<?php esc_attr_e('Strata Fitness Home', 'stratafitness'); ?>">
         <img
-          src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.webp"
-          alt="Strata Fitness"
+          src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.webp'); ?>"
+          alt="<?php esc_attr_e('Strata Fitness', 'stratafitness'); ?>"
           width="500"
           height="154"
           loading="eager"
         >
       </a>
-      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <button class="mobile-menu-toggle" aria-label="<?php esc_attr_e('Toggle navigation menu', 'stratafitness'); ?>" aria-expanded="false">
         <span class="hamburger"></span>
       </button>
       <div class="nav-links" id="nav-links">
@@ -55,14 +48,14 @@
         } else {
             // Fallback links if no menu is set
         ?>
-          <a href="<?php echo home_url('/'); ?>" class="nav-link"<?php echo is_front_page() ? ' aria-current="page"' : ''; ?>>Home</a>
-          <a href="<?php echo home_url('/personal-training/'); ?>" class="nav-link"<?php echo is_page('personal-training') ? ' aria-current="page"' : ''; ?>>Personal Training</a>
-          <a href="<?php echo home_url('/remote-coaching/'); ?>" class="nav-link"<?php echo is_page('remote-coaching') ? ' aria-current="page"' : ''; ?>>Remote Coaching</a>
-          <a href="<?php echo home_url('/nutrition-coaching/'); ?>" class="nav-link"<?php echo is_page('nutrition-coaching') ? ' aria-current="page"' : ''; ?>>Nutrition Coaching</a>
-          <a href="<?php echo home_url('/about/'); ?>" class="nav-link"<?php echo is_page('about') ? ' aria-current="page"' : ''; ?>>About</a>
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-link"<?php echo is_front_page() ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Home', 'stratafitness'); ?></a>
+          <a href="<?php echo esc_url(home_url('/personal-training/')); ?>" class="nav-link"<?php echo is_page('personal-training') ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Personal Training', 'stratafitness'); ?></a>
+          <a href="<?php echo esc_url(home_url('/remote-coaching/')); ?>" class="nav-link"<?php echo is_page('remote-coaching') ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Remote Coaching', 'stratafitness'); ?></a>
+          <a href="<?php echo esc_url(home_url('/nutrition-coaching/')); ?>" class="nav-link"<?php echo is_page('nutrition-coaching') ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Nutrition Coaching', 'stratafitness'); ?></a>
+          <a href="<?php echo esc_url(home_url('/about/')); ?>" class="nav-link"<?php echo is_page('about') ? ' aria-current="page"' : ''; ?>><?php esc_html_e('About', 'stratafitness'); ?></a>
         <?php } ?>
-        <a href="<?php echo home_url('/#apply'); ?>" class="btn btn-primary mandate">
-          APPLY
+        <a href="<?php echo esc_url(home_url('/#apply')); ?>" class="btn btn-primary mandate">
+          <?php esc_html_e('APPLY', 'stratafitness'); ?>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>

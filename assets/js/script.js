@@ -1,8 +1,14 @@
 /**
- * script.js — Strata Fitness Homepage
+ * Strata Fitness — Main Script
+ *
  * Handles: navbar, scroll reveal, service card toggles, hero GSAP animation,
  *          logo marquee, parallax, testimonial 3D carousel, process tabs.
+ *
+ * @package StrataFitness
+ * @since   1.0.0
  */
+
+'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
 

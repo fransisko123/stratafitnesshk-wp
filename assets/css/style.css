@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=Archivo:wght@400;600;800&family=Geist:wght@400;500&display=swap');
+/* ================================================================
+   Strata Fitness — Main Stylesheet
+   Fonts are enqueued via functions.php (no @import needed here).
+   ================================================================ */
 
 :root {
   --color-bg: #f0ede8;
@@ -3285,4 +3288,58 @@ a.contact-info-value:hover {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
+}
+/* ======================================================================
+   ACCESSIBILITY: Reduced Motion
+   ====================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .logos-track {
+    animation: none !important;
+  }
+
+  [data-reveal],
+  [data-stagger] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  [data-stagger] > * {
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ======================================================================
+   SKIP LINK (screen-reader-text)
+   ====================================================================== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-navy);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
 }

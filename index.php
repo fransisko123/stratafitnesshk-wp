@@ -1,6 +1,8 @@
 <?php
 /**
  * Homepage Template
+ *
+ * @package StrataFitness
  */
 get_header();
 ?>
@@ -8,11 +10,11 @@ get_header();
   <!-- ============================================================
        HERO SECTION
   ============================================================ -->
-<header class="hero" id="hero" aria-label="Hero section">
+<header class="hero" id="hero" aria-label="<?php esc_attr_e('Hero section', 'stratafitness'); ?>">
   <!-- Hero BG: use <img> for LCP discoverability, hidden visually -->
   <div class="hero-bg" id="heroBgEl" aria-hidden="true">
     <img
-      src="<?php echo strata_theme_image('strata_home_hero_bg', '/assets/images/10.webp'); ?>"
+      src="<?php echo esc_url(strata_theme_image('strata_home_hero_bg', '/assets/images/10.webp')); ?>"
       alt=""
       fetchpriority="high"
       decoding="async"
@@ -26,22 +28,22 @@ get_header();
 
   <!-- Secondary image revealed during hero scroll animation -->
   <div class="hero-reveal-img" id="heroRevealImg">
-    <img src="<?php echo strata_theme_image('strata_home_hero_reveal', '/assets/images/5.webp'); ?>" alt="Athlete in training" width="1280" height="720" decoding="async" loading="lazy">
+    <img src="<?php echo esc_url(strata_theme_image('strata_home_hero_reveal', '/assets/images/5.webp')); ?>" alt="<?php esc_attr_e('Athlete in training', 'stratafitness'); ?>" width="1280" height="720" decoding="async" loading="lazy">
   </div>
 
   <div class="container hero-container">
     <div class="hero-content">
       <div class="eyebrow hero-eyebrow">
-        <span class="eyebrow-left"><?php echo get_theme_mod('strata_home_hero_eyebrow_left', 'Elite Performance'); ?></span>
-        <span class="eyebrow-right"><?php echo get_theme_mod('strata_home_hero_eyebrow_right', 'Coaching · Hong Kong'); ?></span>
+        <span class="eyebrow-left"><?php echo esc_html(get_theme_mod('strata_home_hero_eyebrow_left', 'Elite Performance')); ?></span>
+        <span class="eyebrow-right"><?php echo esc_html(get_theme_mod('strata_home_hero_eyebrow_right', 'Coaching · Hong Kong')); ?></span>
       </div>
       <h1 class="hero-headline">
-        <span class="headline-left"><?php echo get_theme_mod('strata_home_hero_headline_left', 'We Build'); ?></span>
-        <span class="headline-right"><em><?php echo get_theme_mod('strata_home_hero_headline_right', 'Athletes.'); ?></em></span>
+        <span class="headline-left"><?php echo esc_html(get_theme_mod('strata_home_hero_headline_left', 'We Build')); ?></span>
+        <span class="headline-right"><em><?php echo esc_html(get_theme_mod('strata_home_hero_headline_right', 'Athletes.')); ?></em></span>
       </h1>
       <p class="hero-sub">
-        <span class="sub-left"><?php echo get_theme_mod('strata_home_hero_sub_left', 'Competitive athletes and driven professionals.'); ?></span><br>
-        <span class="sub-right"><?php echo get_theme_mod('strata_home_hero_sub_right', 'We engineer performance not workouts.'); ?></span>
+        <span class="sub-left"><?php echo esc_html(get_theme_mod('strata_home_hero_sub_left', 'Competitive athletes and driven professionals.')); ?></span><br>
+        <span class="sub-right"><?php echo esc_html(get_theme_mod('strata_home_hero_sub_right', 'We engineer performance not workouts.')); ?></span>
       </p>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
@@ -54,20 +56,20 @@ get_header();
   <!-- ============================================================
        MANDATE SECTION
   ============================================================ -->
-  <section class="mandate-section section" id="mandate">
+  <section class="mandate-section section" id="main-content">
     <div class="container">
       <div class="mandate-content" data-reveal>
-        <span class="eyebrow"><?php echo get_theme_mod('strata_home_mandate_eyebrow', '— Our Mandate'); ?></span>
+        <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_mandate_eyebrow', '— Our Mandate')); ?></span>
         <h2 class="mandate-headline">
-          <?php echo get_theme_mod('strata_home_mandate_headline_1', 'ENGINEER'); ?><br><span class="text-red"><?php echo get_theme_mod('strata_home_mandate_headline_2', 'Performance.'); ?></span>
+          <?php echo esc_html(get_theme_mod('strata_home_mandate_headline_1', 'ENGINEER')); ?><br><span class="text-red"><?php echo esc_html(get_theme_mod('strata_home_mandate_headline_2', 'Performance.')); ?></span>
         </h2>
-        <p class="mandate-sub"><?php echo get_theme_mod('strata_home_mandate_desc', 'For competitive athletes and driven professionals based in Hong Kong and beyond. We build superior athletes through individualized programming, ruthless accountability, and a science-led methodology — not template programs and entertainment.'); ?></p>
+        <p class="mandate-sub"><?php echo esc_html(get_theme_mod('strata_home_mandate_desc', 'For competitive athletes and driven professionals based in Hong Kong and beyond. We build superior athletes through individualized programming, ruthless accountability, and a science-led methodology — not template programs and entertainment.')); ?></p>
         <div class="mandate-actions">
-          <a href="<?php echo get_theme_mod('strata_home_mandate_cta_url', '#apply'); ?>" class="btn btn-primary mandate-cta">
-            <?php echo get_theme_mod('strata_home_mandate_cta_text', 'APPLY FOR COACHING'); ?>
+          <a href="<?php echo esc_url(get_theme_mod('strata_home_mandate_cta_url', '#apply')); ?>" class="btn btn-primary mandate-cta">
+            <?php echo esc_html(get_theme_mod('strata_home_mandate_cta_text', 'APPLY FOR COACHING')); ?>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
-          <a href="<?php echo get_theme_mod('strata_home_mandate_outline_url', '#services'); ?>" class="btn btn-outline mandate-outline"><?php echo get_theme_mod('strata_home_mandate_outline_text', 'OUR DISCIPLINES'); ?></a>
+          <a href="<?php echo esc_url(get_theme_mod('strata_home_mandate_outline_url', '#services')); ?>" class="btn btn-outline mandate-outline"><?php echo esc_html(get_theme_mod('strata_home_mandate_outline_text', 'OUR DISCIPLINES')); ?></a>
         </div>
       </div>
     </div>
@@ -79,22 +81,22 @@ get_header();
   <section class="credentials section" id="credentials">
     <div class="container">
       <div class="credentials-header" data-reveal>
-        <p class="eyebrow"><?php echo get_theme_mod('strata_home_creds_eyebrow', '— Credentials'); ?></p>
-        <h2 class="credentials-title"><?php echo get_theme_mod('strata_home_creds_title', 'Educated by the Best.'); ?></h2>
-        <p class="credentials-sub"><?php echo get_theme_mod('strata_home_creds_sub', 'Certifications from the institutions that set the global standard for strength, mobility, sport, and nutrition.'); ?></p>
+        <p class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_creds_eyebrow', '— Credentials')); ?></p>
+        <h2 class="credentials-title"><?php echo esc_html(get_theme_mod('strata_home_creds_title', 'Educated by the Best.')); ?></h2>
+        <p class="credentials-sub"><?php echo esc_html(get_theme_mod('strata_home_creds_sub', 'Certifications from the institutions that set the global standard for strength, mobility, sport, and nutrition.')); ?></p>
       </div>
 
       <!-- Logo marquee -->
       <div class="logos-marquee" aria-label="Certification logos" role="region">
         <div class="logos-track" aria-hidden="true">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -108,12 +110,12 @@ get_header();
 
       <!-- Editorial section header (centered) -->
       <div class="svc-editorial-header" data-reveal>
-        <span class="eyebrow"><?php echo get_theme_mod('strata_home_services_eyebrow', '— Three Paths'); ?></span>
+        <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_services_eyebrow', '— Three Paths')); ?></span>
         <h2 class="svc-editorial-headline">
-          <?php echo get_theme_mod('strata_home_services_headline_1', 'ONE'); ?><br>
-          <em class="text-red" style="font-style: italic; font-weight: 500; font-family: var(--font-display); text-transform: none; letter-spacing: -0.02em;"><?php echo get_theme_mod('strata_home_services_headline_2', 'Standard.'); ?></em>
+          <?php echo esc_html(get_theme_mod('strata_home_services_headline_1', 'ONE')); ?><br>
+          <em class="text-red" style="font-style: italic; font-weight: 500; font-family: var(--font-display); text-transform: none; letter-spacing: -0.02em;"><?php echo esc_html(get_theme_mod('strata_home_services_headline_2', 'Standard.')); ?></em>
         </h2>
-        <p class="svc-editorial-body"><?php echo get_theme_mod('strata_home_services_desc', 'Every Strata service operates under a single principle: engineer the athlete, don\'t entertain them. Choose your path — every one is built on data, intent, and measurable outcomes.'); ?></p>
+        <p class="svc-editorial-body"><?php echo esc_html(get_theme_mod('strata_home_services_desc', 'Every Strata service operates under a single principle: engineer the athlete, don\'t entertain them. Choose your path — every one is built on data, intent, and measurable outcomes.')); ?></p>
       </div>
 
       <!-- Service cards grid -->
@@ -121,25 +123,25 @@ get_header();
 
         <!-- Card 1: Personal Training -->
         <article class="svc-card" id="svc-personal-training" aria-label="Personal Training service card">
-          <div class="svc-bg" aria-hidden="true"><img src="<?php echo strata_theme_image('strata_home_svc_pt_bg', '/assets/images/6.webp'); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+          <div class="svc-bg" aria-hidden="true"><img src="<?php echo esc_url(strata_theme_image('strata_home_svc_pt_bg', '/assets/images/6.webp')); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
           <div class="svc-overlay"></div>
           <div class="svc-body">
             <div class="svc-meta">
-              <span class="svc-tag"><?php echo get_theme_mod('strata_home_svc_pt_tag', '01'); ?></span>
+              <span class="svc-tag"><?php echo esc_html(get_theme_mod('strata_home_svc_pt_tag', '01')); ?></span>
               <button class="svc-toggle" aria-label="Expand Personal Training details">
                 <svg class="icon-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
             <div class="svc-foot">
-              <h3 class="svc-title"><?php echo get_theme_mod('strata_home_svc_pt_title', 'In-Person Personal Training'); ?></h3>
-              <p class="svc-desc"><?php echo get_theme_mod('strata_home_svc_pt_desc', 'One-on-one coaching at our gym in Central, HK. Expert guidance, real-time feedback, and direct supervision for maximum results.'); ?></p>
+              <h3 class="svc-title"><?php echo esc_html(get_theme_mod('strata_home_svc_pt_title', 'In-Person Personal Training')); ?></h3>
+              <p class="svc-desc"><?php echo esc_html(get_theme_mod('strata_home_svc_pt_desc', 'One-on-one coaching at our gym in Central, HK. Expert guidance, real-time feedback, and direct supervision for maximum results.')); ?></p>
               <div class="svc-actions">
-                <a href="<?php echo get_theme_mod('strata_home_svc_pt_cta_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment'); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-pt-cta">
-                  <?php echo get_theme_mod('strata_home_svc_pt_cta_text', 'Book Assessment'); ?>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_pt_cta_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-pt-cta">
+                  <?php echo esc_html(get_theme_mod('strata_home_svc_pt_cta_text', 'Book Assessment')); ?>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
-                <a href="<?php echo get_theme_mod('strata_home_svc_pt_learn_url', '/personal-training/'); ?>" class="svc-learn"><?php echo get_theme_mod('strata_home_svc_pt_learn_text', 'Learn More'); ?></a>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_pt_learn_url', '/personal-training/')); ?>" class="svc-learn"><?php echo esc_html(get_theme_mod('strata_home_svc_pt_learn_text', 'Learn More')); ?></a>
               </div>
             </div>
           </div>
@@ -147,25 +149,25 @@ get_header();
 
         <!-- Card 2: Remote Coaching -->
         <article class="svc-card" id="svc-remote-coaching" aria-label="Remote Coaching service card">
-          <div class="svc-bg" aria-hidden="true"><img src="<?php echo strata_theme_image('strata_home_svc_rc_bg', '/assets/images/7.webp'); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+          <div class="svc-bg" aria-hidden="true"><img src="<?php echo esc_url(strata_theme_image('strata_home_svc_rc_bg', '/assets/images/7.webp')); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
           <div class="svc-overlay"></div>
           <div class="svc-body">
             <div class="svc-meta">
-              <span class="svc-tag"><?php echo get_theme_mod('strata_home_svc_rc_tag', '02'); ?></span>
+              <span class="svc-tag"><?php echo esc_html(get_theme_mod('strata_home_svc_rc_tag', '02')); ?></span>
               <button class="svc-toggle" aria-label="Expand Remote Coaching details">
                 <svg class="icon-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
             <div class="svc-foot">
-              <h3 class="svc-title"><?php echo get_theme_mod('strata_home_svc_rc_title', 'Remote Coaching'); ?></h3>
-              <p class="svc-desc"><?php echo get_theme_mod('strata_home_svc_rc_desc', 'Complete programming tailored to your goals, capacity, and lifestyle. Includes weekly coaching, form reviews, and real-time program adjustments.'); ?></p>
+              <h3 class="svc-title"><?php echo esc_html(get_theme_mod('strata_home_svc_rc_title', 'Remote Coaching')); ?></h3>
+              <p class="svc-desc"><?php echo esc_html(get_theme_mod('strata_home_svc_rc_desc', 'Complete programming tailored to your goals, capacity, and lifestyle. Includes weekly coaching, form reviews, and real-time program adjustments.')); ?></p>
               <div class="svc-actions">
-                <a href="<?php echo get_theme_mod('strata_home_svc_rc_cta_url', 'https://go.stratafitnesshk.com/remotecoachingcall'); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-rc-cta">
-                  <?php echo get_theme_mod('strata_home_svc_rc_cta_text', 'Book a Call'); ?>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_rc_cta_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-rc-cta">
+                  <?php echo esc_html(get_theme_mod('strata_home_svc_rc_cta_text', 'Book a Call')); ?>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
-                <a href="<?php echo get_theme_mod('strata_home_svc_rc_learn_url', '/remote-coaching/'); ?>" class="svc-learn"><?php echo get_theme_mod('strata_home_svc_rc_learn_text', 'Learn More'); ?></a>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_rc_learn_url', '/remote-coaching/')); ?>" class="svc-learn"><?php echo esc_html(get_theme_mod('strata_home_svc_rc_learn_text', 'Learn More')); ?></a>
               </div>
             </div>
           </div>
@@ -173,25 +175,25 @@ get_header();
 
         <!-- Card 3: Nutrition Coaching -->
         <article class="svc-card" id="svc-nutrition-coaching" aria-label="Nutrition Coaching service card">
-          <div class="svc-bg" aria-hidden="true"><img src="<?php echo strata_theme_image('strata_home_svc_nc_bg', '/assets/images/8.webp'); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+          <div class="svc-bg" aria-hidden="true"><img src="<?php echo esc_url(strata_theme_image('strata_home_svc_nc_bg', '/assets/images/8.webp')); ?>" alt="" width="600" height="560" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
           <div class="svc-overlay"></div>
           <div class="svc-body">
             <div class="svc-meta">
-              <span class="svc-tag"><?php echo get_theme_mod('strata_home_svc_nc_tag', '03'); ?></span>
+              <span class="svc-tag"><?php echo esc_html(get_theme_mod('strata_home_svc_nc_tag', '03')); ?></span>
               <button class="svc-toggle" aria-label="Expand Nutrition Coaching details">
                 <svg class="icon-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
             <div class="svc-foot">
-              <h3 class="svc-title"><?php echo get_theme_mod('strata_home_svc_nc_title', 'Nutrition Coaching'); ?></h3>
-              <p class="svc-desc"><?php echo get_theme_mod('strata_home_svc_nc_desc', 'Data-driven nutritional periodization. Optimized for body composition, recovery, and peak performance at every phase of training.'); ?></p>
+              <h3 class="svc-title"><?php echo esc_html(get_theme_mod('strata_home_svc_nc_title', 'Nutrition Coaching')); ?></h3>
+              <p class="svc-desc"><?php echo esc_html(get_theme_mod('strata_home_svc_nc_desc', 'Data-driven nutritional periodization. Optimized for body composition, recovery, and peak performance at every phase of training.')); ?></p>
               <div class="svc-actions">
-                <a href="<?php echo get_theme_mod('strata_home_svc_nc_cta_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call'); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-nc-cta">
-                  <?php echo get_theme_mod('strata_home_svc_nc_cta_text', 'Book Discovery Call'); ?>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_nc_cta_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" class="svc-cta btn btn-primary" target="_blank" rel="noopener" id="svc-nc-cta">
+                  <?php echo esc_html(get_theme_mod('strata_home_svc_nc_cta_text', 'Book Discovery Call')); ?>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
-                <a href="<?php echo get_theme_mod('strata_home_svc_nc_learn_url', '/nutrition-coaching/'); ?>" class="svc-learn"><?php echo get_theme_mod('strata_home_svc_nc_learn_text', 'Learn More'); ?></a>
+                <a href="<?php echo esc_url(get_theme_mod('strata_home_svc_nc_learn_url', '/nutrition-coaching/')); ?>" class="svc-learn"><?php echo esc_html(get_theme_mod('strata_home_svc_nc_learn_text', 'Learn More')); ?></a>
               </div>
             </div>
           </div>
@@ -208,19 +210,19 @@ get_header();
     <div class="container">
       <div class="process-tabs-header" data-reveal>
         <div class="header-left">
-          <span class="eyebrow"><?php echo get_theme_mod('strata_home_process_eyebrow', '— The Process'); ?></span>
-          <h2 class="pt-headline"><?php echo get_theme_mod('strata_home_process_headline_1', 'ASSESSMENT'); ?><br>TO <em class="text-red text-lowercase"><?php echo get_theme_mod('strata_home_process_headline_2', 'execution.'); ?></em></h2>
+          <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_process_eyebrow', '— The Process')); ?></span>
+          <h2 class="pt-headline"><?php echo esc_html(get_theme_mod('strata_home_process_headline_1', 'ASSESSMENT')); ?><br>TO <em class="text-red text-lowercase"><?php echo esc_html(get_theme_mod('strata_home_process_headline_2', 'execution.')); ?></em></h2>
         </div>
         <div class="header-right">
-          <p><?php echo get_theme_mod('strata_home_process_desc', 'Every athlete enters the same three-phase architecture. Select a service to see exactly how it unfolds.'); ?></p>
+          <p><?php echo esc_html(get_theme_mod('strata_home_process_desc', 'Every athlete enters the same three-phase architecture. Select a service to see exactly how it unfolds.')); ?></p>
         </div>
       </div>
 
       <div class="process-tabs-wrapper" data-reveal data-delay="100">
         <div class="process-tabs-nav" role="tablist">
-          <button role="tab" class="tab-btn active" data-tab="pt" aria-selected="true"><?php echo get_theme_mod('strata_home_process_tab_1', 'PERSONAL TRAINING'); ?></button>
-          <button role="tab" class="tab-btn" data-tab="rc" aria-selected="false"><?php echo get_theme_mod('strata_home_process_tab_2', 'REMOTE COACHING'); ?></button>
-          <button role="tab" class="tab-btn" data-tab="nc" aria-selected="false"><?php echo get_theme_mod('strata_home_process_tab_3', 'NUTRITION COACHING'); ?></button>
+          <button role="tab" class="tab-btn active" data-tab="pt" aria-selected="true"><?php echo esc_html(get_theme_mod('strata_home_process_tab_1', 'PERSONAL TRAINING')); ?></button>
+          <button role="tab" class="tab-btn" data-tab="rc" aria-selected="false"><?php echo esc_html(get_theme_mod('strata_home_process_tab_2', 'REMOTE COACHING')); ?></button>
+          <button role="tab" class="tab-btn" data-tab="nc" aria-selected="false"><?php echo esc_html(get_theme_mod('strata_home_process_tab_3', 'NUTRITION COACHING')); ?></button>
         </div>
 
         <div class="process-tabs-content">
@@ -229,18 +231,18 @@ get_header();
             <div class="process-grid">
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">01</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_pt_s1_title', 'CONSULTATION'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_pt_s1_desc', 'A 30-minute deep-dive into your training history, injury record, lifestyle constraints, and the outcome you actually want. Movement screening included. This is where your prescription begins.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_pt_s1_title', 'CONSULTATION')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_pt_s1_desc', 'A 30-minute deep-dive into your training history, injury record, lifestyle constraints, and the outcome you actually want. Movement screening included. This is where your prescription begins.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">02</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_pt_s2_title', 'PROGRAM DESIGN'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_pt_s2_desc', 'Physiological profiling, baseline metrics, and full macrocycle design. Your first training block is built and periodized before you ever step on the floor. No templates.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_pt_s2_title', 'PROGRAM DESIGN')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_pt_s2_desc', 'Physiological profiling, baseline metrics, and full macrocycle design. Your first training block is built and periodized before you ever step on the floor. No templates.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">03</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_pt_s3_title', 'COACHED EXECUTION'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_pt_s3_desc', 'Supervised in-person sessions with real-time mechanical feedback and load management. Programming adapts to your readiness, recovery, and trajectory — week after week.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_pt_s3_title', 'COACHED EXECUTION')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_pt_s3_desc', 'Supervised in-person sessions with real-time mechanical feedback and load management. Programming adapts to your readiness, recovery, and trajectory — week after week.')); ?></p>
               </div>
             </div>
           </div>
@@ -250,18 +252,18 @@ get_header();
             <div class="process-grid">
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">01</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_rc_s1_title', 'DISCOVERY CALL'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_rc_s1_desc', 'A 30-minute call to assess athlete readiness, equipment access, and training discipline. Remote coaching demands self-direction — we confirm it before we start.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_rc_s1_title', 'DISCOVERY CALL')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_rc_s1_desc', 'A 30-minute call to assess athlete readiness, equipment access, and training discipline. Remote coaching demands self-direction — we confirm it before we start.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">02</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_rc_s2_title', 'ONBOARDING'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_rc_s2_desc', 'Detailed intake questionnaire, baseline metric collection, app/platform setup, and your Week 1 program delivered before Day 1. You know exactly what\'s coming.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_rc_s2_title', 'ONBOARDING')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_rc_s2_desc', 'Detailed intake questionnaire, baseline metric collection, app/platform setup, and your Week 1 program delivered before Day 1. You know exactly what\'s coming.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">03</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_rc_s3_title', 'WEEKLY LOOP'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_rc_s3_desc', 'Train. Submit footage. Check-in. We review readiness, performance data, and recovery markers every seven days. Programming evolves accordingly — measured, intentional.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_rc_s3_title', 'WEEKLY LOOP')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_rc_s3_desc', 'Train. Submit footage. Check-in. We review readiness, performance data, and recovery markers every seven days. Programming evolves accordingly — measured, intentional.')); ?></p>
               </div>
             </div>
           </div>
@@ -271,18 +273,18 @@ get_header();
             <div class="process-grid">
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">01</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_nc_s1_title', 'BASELINE ASSESSMENT'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_nc_s1_desc', 'Body composition review, dietary history, health markers, and performance goals. We baseline everything before prescribing anything — no guesswork, no assumptions.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_nc_s1_title', 'BASELINE ASSESSMENT')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_nc_s1_desc', 'Body composition review, dietary history, health markers, and performance goals. We baseline everything before prescribing anything — no guesswork, no assumptions.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">02</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_nc_s2_title', 'NUTRITIONAL ARCHITECTURE'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_nc_s2_desc', 'Calorie targets, macro ratios, and meal frameworks built to your physiology and training load. Not a rigid meal plan — a practical system that integrates with your life.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_nc_s2_title', 'NUTRITIONAL ARCHITECTURE')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_nc_s2_desc', 'Calorie targets, macro ratios, and meal frameworks built to your physiology and training load. Not a rigid meal plan — a practical system that integrates with your life.')); ?></p>
               </div>
               <div class="process-step-tab">
                 <div class="step-num-wrap"><span class="num text-red">03</span><span class="lbl">STEP</span></div>
-                <h3><?php echo get_theme_mod('strata_home_process_nc_s3_title', 'PERIODIZATION'); ?></h3>
-                <p><?php echo get_theme_mod('strata_home_process_nc_s3_desc', 'Nutrition phases aligned to your training blocks. Performance, maintenance, and recomposition cycles executed with intent — not intuition. Weekly tracking review included.'); ?></p>
+                <h3><?php echo esc_html(get_theme_mod('strata_home_process_nc_s3_title', 'PERIODIZATION')); ?></h3>
+                <p><?php echo esc_html(get_theme_mod('strata_home_process_nc_s3_desc', 'Nutrition phases aligned to your training blocks. Performance, maintenance, and recomposition cycles executed with intent — not intuition. Weekly tracking review included.')); ?></p>
               </div>
             </div>
           </div>
@@ -295,21 +297,21 @@ get_header();
        PHILOSOPHY SECTION
   ============================================================ -->
   <section class="philosophy-section section" id="philosophy" aria-label="Our Philosophy">
-    <div class="philosophy-bg" aria-hidden="true"><img src="<?php echo strata_theme_image('strata_home_philosophy_bg', '/assets/images/1.webp'); ?>" alt="" width="1920" height="1080" loading="lazy" decoding="async" style="position:absolute;inset:-15%;width:calc(100% + 30%);height:calc(100% + 30%);object-fit:cover;object-position:center 30%;opacity:0.18;"></div>
+    <div class="philosophy-bg" aria-hidden="true"><img src="<?php echo esc_url(strata_theme_image('strata_home_philosophy_bg', '/assets/images/1.webp')); ?>" alt="" width="1920" height="1080" loading="lazy" decoding="async" style="position:absolute;inset:-15%;width:calc(100% + 30%);height:calc(100% + 30%);object-fit:cover;object-position:center 30%;opacity:0.18;"></div>
     <div class="philosophy-overlay"></div>
 
     <div class="container philosophy-container">
       <div class="philosophy-content" data-reveal>
-        <span class="eyebrow"><?php echo get_theme_mod('strata_home_philosophy_eyebrow', '— Our Philosophy'); ?></span>
+        <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_philosophy_eyebrow', '— Our Philosophy')); ?></span>
         <h2 class="philosophy-headline">
-          <?php echo get_theme_mod('strata_home_philosophy_headline_1', 'Intensity.'); ?><br>
-          <?php echo get_theme_mod('strata_home_philosophy_headline_2', 'Consistency.'); ?><br>
-          <?php echo get_theme_mod('strata_home_philosophy_headline_3', 'Precision.'); ?>
+          <?php echo esc_html(get_theme_mod('strata_home_philosophy_headline_1', 'Intensity.')); ?><br>
+          <?php echo esc_html(get_theme_mod('strata_home_philosophy_headline_2', 'Consistency.')); ?><br>
+          <?php echo esc_html(get_theme_mod('strata_home_philosophy_headline_3', 'Precision.')); ?>
         </h2>
-        <p class="philosophy-body"><?php echo get_theme_mod('strata_home_philosophy_p1', 'We don\'t do generic workouts. We engineer performance. Our approach is rooted in sports science — relentlessly focused on progressive overload, strict mechanics, and absolute accountability.'); ?></p>
-        <p class="philosophy-body"><?php echo get_theme_mod('strata_home_philosophy_p2', 'Whether you\'re a competitive athlete or an executive demanding peak physical condition, our standard remains exactly the same.'); ?></p>
-        <a href="<?php echo get_theme_mod('strata_home_philosophy_cta_url', '/about/'); ?>" class="btn btn-ghost btn-lg philosophy-cta" id="philosophy-about-btn">
-          <span><?php echo get_theme_mod('strata_home_philosophy_cta_text', 'Read Our Story'); ?></span>
+        <p class="philosophy-body"><?php echo esc_html(get_theme_mod('strata_home_philosophy_p1', 'We don\'t do generic workouts. We engineer performance. Our approach is rooted in sports science — relentlessly focused on progressive overload, strict mechanics, and absolute accountability.')); ?></p>
+        <p class="philosophy-body"><?php echo esc_html(get_theme_mod('strata_home_philosophy_p2', 'Whether you\'re a competitive athlete or an executive demanding peak physical condition, our standard remains exactly the same.')); ?></p>
+        <a href="<?php echo esc_url(get_theme_mod('strata_home_philosophy_cta_url', '/about/')); ?>" class="btn btn-ghost btn-lg philosophy-cta" id="philosophy-about-btn">
+          <span><?php echo esc_html(get_theme_mod('strata_home_philosophy_cta_text', 'Read Our Story')); ?></span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
@@ -340,9 +342,9 @@ get_header();
   <section class="testimonials-section section" id="testimonials" aria-label="Client Results and Testimonials">
     <div class="container">
       <div class="testimonials-header" data-reveal>
-        <span class="eyebrow"><?php echo get_theme_mod('strata_home_testimonials_eyebrow', '— The Results'); ?></span>
-        <h2 class="testimonials-headline"><?php echo get_theme_mod('strata_home_testimonials_headline', 'Voices from the floor.'); ?></h2>
-        <p class="testimonials-sub"><?php echo get_theme_mod('strata_home_testimonials_sub', 'Athletes. One standard. Real words from clients who turned up — and turned around.'); ?></p>
+        <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_testimonials_eyebrow', '— The Results')); ?></span>
+        <h2 class="testimonials-headline"><?php echo esc_html(get_theme_mod('strata_home_testimonials_headline', 'Voices from the floor.')); ?></h2>
+        <p class="testimonials-sub"><?php echo esc_html(get_theme_mod('strata_home_testimonials_sub', 'Athletes. One standard. Real words from clients who turned up — and turned around.')); ?></p>
       </div>
     </div>
 
@@ -423,12 +425,12 @@ get_header();
     <div class="container">
       <div class="apply-grid">
         <div class="apply-info" data-reveal>
-          <span class="eyebrow"><?php echo get_theme_mod('strata_home_apply_eyebrow', '— Get In Touch'); ?></span>
-          <h2 class="apply-headline"><?php echo get_theme_mod('strata_home_apply_headline_1', 'APPLY FOR'); ?><br><em class="text-red text-lowercase" style="font-family: var(--font-heading); font-weight: normal; font-style: italic;"><?php echo get_theme_mod('strata_home_apply_headline_2', 'coaching.'); ?></em></h2>
-          <p class="apply-desc"><?php echo get_theme_mod('strata_home_apply_desc', 'Tell us where you are, what you want, and how serious you are. We\'ll respond within 24 hours.'); ?></p>
+          <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_apply_eyebrow', '— Get In Touch')); ?></span>
+          <h2 class="apply-headline"><?php echo esc_html(get_theme_mod('strata_home_apply_headline_1', 'APPLY FOR')); ?><br><em class="text-red text-lowercase" style="font-family: var(--font-heading); font-weight: normal; font-style: italic;"><?php echo esc_html(get_theme_mod('strata_home_apply_headline_2', 'coaching.')); ?></em></h2>
+          <p class="apply-desc"><?php echo esc_html(get_theme_mod('strata_home_apply_desc', 'Tell us where you are, what you want, and how serious you are. We\'ll respond within 24 hours.')); ?></p>
           <div class="apply-direct">
-            <span class="direct-lbl"><?php echo get_theme_mod('strata_home_apply_direct_label', 'DIRECT'); ?></span>
-            <a href="mailto:<?php echo get_theme_mod('strata_home_apply_direct_email', 'jon@stratafitnesshk.com'); ?>" class="direct-email"><?php echo get_theme_mod('strata_home_apply_direct_email', 'jon@stratafitnesshk.com'); ?></a>
+            <span class="direct-lbl"><?php echo esc_html(get_theme_mod('strata_home_apply_direct_label', 'DIRECT')); ?></span>
+            <a href="mailto:<?php echo esc_html(get_theme_mod('strata_home_apply_direct_email', 'jon@stratafitnesshk.com')); ?>" class="direct-email"><?php echo esc_html(get_theme_mod('strata_home_apply_direct_email', 'jon@stratafitnesshk.com')); ?></a>
           </div>
         </div>
 
@@ -469,7 +471,7 @@ get_header();
               <textarea id="apply-goals" rows="4" placeholder="Training history, injuries, what you're chasing..." required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary submit-btn"><?php echo get_theme_mod('strata_home_apply_submit_text', 'Send Application'); ?></button>
+            <button type="submit" class="btn btn-primary submit-btn"><?php echo esc_html(get_theme_mod('strata_home_apply_submit_text', 'Send Application')); ?></button>
           </form>
         </div>
       </div>

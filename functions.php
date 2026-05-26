@@ -1,11 +1,16 @@
 <?php
 /**
  * Strata Fitness Theme Functions
+ *
+ * @package StrataFitness
+ * @since   1.0.0
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+define( 'STRATA_VERSION', '1.0.0' );
 
 // ── Theme Setup ──
 function stratafitness_theme_setup() {
@@ -43,7 +48,7 @@ function stratafitness_enqueue_assets() {
         'stratafitness-style',
         get_template_directory_uri() . '/assets/css/style.css',
         array(),
-        '1.0.0'
+        STRATA_VERSION
     );
 
     // Google Fonts (non-blocking)
@@ -76,7 +81,7 @@ function stratafitness_enqueue_assets() {
         'stratafitness-script',
         get_template_directory_uri() . '/assets/js/script.js',
         array('gsap', 'gsap-scrolltrigger'),
-        '1.0.0',
+        STRATA_VERSION,
         true
     );
 }
@@ -91,6 +96,79 @@ function stratafitness_add_defer_attribute($tag, $handle) {
     return $tag;
 }
 add_filter('script_loader_tag', 'stratafitness_add_defer_attribute', 10, 2);
+
+// ── Resource Hints (preconnect / dns-prefetch) ──
+function stratafitness_resource_hints($hints, $relation_type) {
+    if ('preconnect' === $relation_type) {
+        $hints[] = array(
+            'href'        => 'https://fonts.googleapis.com',
+            'crossorigin' => 'anonymous',
+        );
+        $hints[] = array(
+            'href'        => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        );
+        $hints[] = array(
+            'href'        => 'https://cdnjs.cloudflare.com',
+            'crossorigin' => 'anonymous',
+        );
+    }
+    if ('dns-prefetch' === $relation_type) {
+        $hints[] = 'https://cdnjs.cloudflare.com';
+    }
+    return $hints;
+}
+add_filter('wp_resource_hints', 'stratafitness_resource_hints', 10, 2);
+
+// ── Skip Navigation Link ──
+function stratafitness_skip_link() {
+    echo '<a class="skip-link screen-reader-text" href="#main-content">' . esc_html__('Skip to content', 'stratafitness') . '</a>';
+}
+add_action('wp_body_open', 'stratafitness_skip_link');
+
+// ── Navigation: aria-current for primary menu ──
+function stratafitness_nav_menu_link_attributes($atts, $item, $args) {
+    if (isset($args->theme_location) && 'primary' === $args->theme_location) {
+        if (!isset($atts['aria-current']) && $item->current) {
+            $atts['aria-current'] = 'page';
+        }
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'stratafitness_nav_menu_link_attributes', 10, 3);
+
+// ── Auto Lazy-Load: add loading="lazy" to in-content images & iframes ──
+function stratafitness_add_lazy_loading($content) {
+    $content = preg_replace(
+        '/<img(?!.*?(?:loading|fetchpriority)=[\'"])([^>]+)>/is',
+        '<img$1 loading="lazy">',
+        $content
+    );
+    $content = preg_replace(
+        '/<iframe(?!.*?loading=[\'"])([^>]+)>/is',
+        '<iframe$1 loading="lazy">',
+        $content
+    );
+    return $content;
+}
+add_filter('the_content', 'stratafitness_add_lazy_loading');
+add_filter('widget_text_content', 'stratafitness_add_lazy_loading');
+
+// ── WordPress Cleanup ──
+function stratafitness_clean_head() {
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+}
+add_action('init', 'stratafitness_clean_head');
+
+function stratafitness_dequeue_block_styles() {
+    if (!is_admin()) {
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('global-styles');
+    }
+}
+add_action('wp_enqueue_scripts', 'stratafitness_dequeue_block_styles', 100);
 
 // ── Allow SVG uploads ──
 function stratafitness_allow_svg($mimes) {
@@ -838,6 +916,19 @@ function strata_theme_image_url($setting, $default_url) {
         if ($url) return $url;
     }
     return $default_url;
+}
+
+// ── Escaping Helpers for template files ──
+function strata_esc_mod($setting, $default = '') {
+    echo esc_html(get_theme_mod($setting, $default));
+}
+
+function strata_esc_mod_textarea($setting, $default = '') {
+    echo wp_kses_post(get_theme_mod($setting, $default));
+}
+
+function strata_esc_mod_url($setting, $default = '') {
+    echo esc_url(get_theme_mod($setting, $default));
 }
 
 // ── Auto-create required pages on theme activation ──
