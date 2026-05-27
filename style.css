@@ -2,8 +2,14 @@
 Theme Name: Strata Fitness
 Theme URI: https://stratafitnesshk.com
 Author: Strata Fitness
+Author URI: https://stratafitnesshk.com
 Description: Premium fitness and performance coaching WordPress theme for Strata Fitness HK. Built for athletes who demand more.
 Version: 1.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
 License: Proprietary
+License URI: https://stratafitnesshk.com/terms
 Text Domain: stratafitness
+Domain Path: /languages
 */

@@ -175,12 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // Scroll-driven timeline (pinned hero)
+    // Snappier scrub on mobile for better responsiveness
+    const isMobile = /Mobi|Android/.test(navigator.userAgent);
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSection,
         start: 'top top',
         end: '+=120%',  // Long scrub distance for cinematic pacing
-        scrub: 1,     // 1s lag for premium feel
+        scrub: isMobile ? 0.4 : 1,  // Snappier on mobile
         pin: true,
       }
     });
@@ -253,6 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const gap   = cardW * 0.82;
 
       cards.forEach((card, i) => {
+        // Ensure CSS transition is active for smooth sliding
+        card.style.transition = '';
+
         let offset = i - current;
         if (offset >  total / 2) offset -= total;
         if (offset < -total / 2) offset += total;
@@ -329,22 +334,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 3D tilt on the active card
+    let tiltTicking = false;
     stage.addEventListener('mousemove', (e) => {
-      const activeCard = cards[current];
-      if (!activeCard) return;
-      const rect = activeCard.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
-      const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
-      const rotateY = ((x - rect.width  / 2) / (rect.width  / 2)) *  8;
-      activeCard.style.transform =
-        `translate(-50%, -50%) translate3d(0, 0, 0) scale(1) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      if (tiltTicking) return;
+      tiltTicking = true;
+      requestAnimationFrame(() => {
+        const activeCard = cards[current];
+        if (!activeCard) { tiltTicking = false; return; }
+        const rect = activeCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) { tiltTicking = false; return; }
+        const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
+        const rotateY = ((x - rect.width  / 2) / (rect.width  / 2)) *  8;
+        // Kill CSS transition during tilt for instant, smooth response
+        activeCard.style.transition = 'none';
+        activeCard.style.transform =
+          `translate(-50%, -50%) translate3d(0, 0, 0) scale(1) perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        tiltTicking = false;
+      });
     });
 
     stage.addEventListener('mouseleave', () => {
       const activeCard = cards[current];
       if (activeCard) {
+        // Quick spring-back (200ms feels instant but smooth)
+        activeCard.style.transition = 'transform 0.2s ease-out';
         activeCard.style.transform = 'translate(-50%, -50%) translate3d(0, 0, 0) scale(1)';
       }
     });
@@ -442,15 +457,11 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'Sending...';
 
       // Gather form data
-      const formData = new FormData();
-      formData.append('action', 'strata_apply_form');
-      formData.append('strata_apply_nonce', StrataAjax.nonce);
-      formData.append('name', applyForm.querySelector('#apply-name').value.trim());
-      formData.append('email', applyForm.querySelector('#apply-email').value.trim());
-      formData.append('discipline', applyForm.querySelector('input[name="discipline"]:checked')?.value || '');
-      formData.append('goals', applyForm.querySelector('#apply-goals').value.trim());
+      const formData = new FormData(applyForm);
+      formData.set('action', 'strata_apply_form');
+      formData.set('strata_apply_nonce', StrataAjax.nonce);
       // Honeypot — leave empty
-      formData.append('website', '');
+      formData.set('website', '');
 
       try {
         const response = await fetch(StrataAjax.ajaxUrl, {
@@ -463,11 +474,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show feedback message
         const feedback = document.createElement('div');
         feedback.className = 'form-feedback';
+        feedback.classList.add(result.success ? 'form-feedback--success' : 'form-feedback--error');
         feedback.textContent = result.data?.message || 'Something went wrong.';
-        feedback.style.cssText = result.success
-          ? 'color: #10b981; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 6px;'
-          : 'color: #ef4444; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 6px;';
-
         applyForm.appendChild(feedback);
 
         if (result.success) {
@@ -476,9 +484,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch (err) {
         const feedback = document.createElement('div');
-        feedback.className = 'form-feedback';
+        feedback.className = 'form-feedback form-feedback--error';
         feedback.textContent = 'Network error. Please try again.';
-        feedback.style.cssText = 'color: #ef4444; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 6px;';
         applyForm.appendChild(feedback);
       } finally {
         // Restore button

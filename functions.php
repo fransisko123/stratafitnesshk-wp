@@ -14,6 +14,9 @@ define( 'STRATA_VERSION', '1.0.0' );
 
 // ── Theme Setup ──
 function stratafitness_theme_setup() {
+    // Make theme available for translation
+    load_theme_textdomain('stratafitness', get_template_directory() . '/languages');
+
     // Let WordPress manage the <title> tag
     add_theme_support('title-tag');
 
@@ -51,13 +54,16 @@ function stratafitness_enqueue_assets() {
         STRATA_VERSION
     );
 
-    // Google Fonts (non-blocking)
+    // Google Fonts (loaded with media="print" trick to eliminate render-blocking)
     wp_enqueue_style(
         'stratafitness-fonts',
         'https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Archivo:wght@400;600;800&family=Geist:wght@300;400;500&display=swap',
         array(),
         null
     );
+
+    // Preload key font files to reduce CLS
+    add_action('wp_head', 'stratafitness_font_preload', 1);
 
     // GSAP from CDN
     wp_enqueue_script(
@@ -76,6 +82,17 @@ function stratafitness_enqueue_assets() {
         true
     );
 
+    // Quiz embed script (only on remote coaching page)
+    if (is_page('remote-coaching') && get_theme_mod('strata_rc_quiz_enabled', true)) {
+        wp_enqueue_script(
+            'stratafitness-quiz-embed',
+            get_template_directory_uri() . '/assets/js/quiz-embed.js',
+            array(),
+            STRATA_VERSION,
+            true
+        );
+    }
+
     // Main JS
     wp_enqueue_script(
         'stratafitness-script',
@@ -93,9 +110,29 @@ function stratafitness_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'stratafitness_enqueue_assets');
 
+// ── Make Google Fonts non-render-blocking ──
+function stratafitness_fonts_media_attribute($html, $handle) {
+    if ('stratafitness-fonts' === $handle) {
+        // Swap media="print" to "all" on load (eliminates render-blocking)
+        return str_replace(
+            "media='all'",
+            "media='print' onload=\"this.media='all'; this.onload=null;\"",
+            $html
+        );
+    }
+    return $html;
+}
+add_filter('style_loader_tag', 'stratafitness_fonts_media_attribute', 10, 2);
+
+// ── Preload key font files to reduce CLS ──
+function stratafitness_font_preload() {
+    // Preload the critical display font (Archivo Narrow wght 700 - used in all headings)
+    echo '<link rel="preload" href="' . esc_url(get_template_directory_uri() . '/assets/fonts/archivo-narrow-700.woff2') . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
+}
+
 // ── Add defer/async to GSAP and main script ──
 function stratafitness_add_defer_attribute($tag, $handle) {
-    $defer_scripts = array('gsap', 'gsap-scrolltrigger', 'stratafitness-script');
+    $defer_scripts = array('gsap', 'gsap-scrolltrigger', 'stratafitness-script', 'stratafitness-quiz-embed');
     if (in_array($handle, $defer_scripts, true)) {
         return str_replace(' src', ' defer src', $tag);
     }
@@ -160,6 +197,26 @@ function stratafitness_add_lazy_loading($content) {
 add_filter('the_content', 'stratafitness_add_lazy_loading');
 add_filter('widget_text_content', 'stratafitness_add_lazy_loading');
 
+// ── Open Graph Meta Tags ──
+function stratafitness_opengraph_tags() {
+    global $post;
+    if (!is_singular()) return;
+
+    $title       = get_the_title();
+    $url         = get_permalink();
+    $description = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 30);
+    $image_url   = has_post_thumbnail() ? get_the_post_thumbnail_url($post->ID, 'large') : get_template_directory_uri() . '/assets/images/logo.webp';
+
+    echo '<meta property="og:title" content="' . esc_attr($title) . '">' . "\n";
+    echo '<meta property="og:description" content="' . esc_attr($description) . '">' . "\n";
+    echo '<meta property="og:url" content="' . esc_url($url) . '">' . "\n";
+    echo '<meta property="og:image" content="' . esc_url($image_url) . '">' . "\n";
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta property="og:site_name" content="' . esc_attr(get_bloginfo('name')) . '">' . "\n";
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+}
+add_action('wp_head', 'stratafitness_opengraph_tags', 5);
+
 // ── WordPress Cleanup ──
 function stratafitness_clean_head() {
     remove_action('wp_head', 'print_emoji_detection_script', 7);
@@ -176,17 +233,24 @@ function stratafitness_dequeue_block_styles() {
 }
 add_action('wp_enqueue_scripts', 'stratafitness_dequeue_block_styles', 100);
 
-// ── Mailtrap SMTP (local development only) ──
-function stratafitness_mailtrap_smtp($phpmailer) {
-    $phpmailer->isSMTP();
-    $phpmailer->Host       = 'sandbox.smtp.mailtrap.io';
-    $phpmailer->SMTPAuth   = true;
-    $phpmailer->Port       = 2525;
-    $phpmailer->Username   = '19ef6fff75e149';
-    $phpmailer->Password   = '138c474d1057be';
-    $phpmailer->SMTPSecure = 'tls'; // Mailtrap sandbox uses STARTTLS on port 2525
+// ── Mailtrap SMTP (local development only - configure via wp-config.php) ──
+// To enable, define these in wp-config.php:
+//   define('STRATA_SMTP_HOST', 'sandbox.smtp.mailtrap.io');
+//   define('STRATA_SMTP_PORT', 2525);
+//   define('STRATA_SMTP_USER', 'your_username');
+//   define('STRATA_SMTP_PASS', 'your_password');
+if (defined('STRATA_SMTP_HOST') && defined('STRATA_SMTP_USER') && defined('STRATA_SMTP_PASS')) {
+    function stratafitness_mailtrap_smtp($phpmailer) {
+        $phpmailer->isSMTP();
+        $phpmailer->Host       = STRATA_SMTP_HOST;
+        $phpmailer->SMTPAuth   = true;
+        $phpmailer->Port       = defined('STRATA_SMTP_PORT') ? STRATA_SMTP_PORT : 2525;
+        $phpmailer->Username   = STRATA_SMTP_USER;
+        $phpmailer->Password   = STRATA_SMTP_PASS;
+        $phpmailer->SMTPSecure = 'tls';
+    }
+    add_action('phpmailer_init', 'stratafitness_mailtrap_smtp');
 }
-add_action('phpmailer_init', 'stratafitness_mailtrap_smtp');
 
 // ── Allow SVG uploads ──
 function stratafitness_allow_svg($mimes) {
@@ -209,10 +273,10 @@ function stratafitness_handle_apply_form() {
     }
 
     // Sanitize & validate inputs
-    $name       = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
-    $email      = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+    $name       = isset($_POST['apply-name']) ? sanitize_text_field(wp_unslash($_POST['apply-name'])) : '';
+    $email      = isset($_POST['apply-email']) ? sanitize_email(wp_unslash($_POST['apply-email'])) : '';
     $discipline = isset($_POST['discipline']) ? sanitize_text_field(wp_unslash($_POST['discipline'])) : '';
-    $goals      = isset($_POST['goals']) ? sanitize_textarea_field(wp_unslash($_POST['goals'])) : '';
+    $goals      = isset($_POST['apply-goals']) ? sanitize_textarea_field(wp_unslash($_POST['apply-goals'])) : '';
 
     if (empty($name) || empty($email) || empty($goals)) {
         wp_send_json_error(array('message' => __('Please fill in all required fields.', 'stratafitness')));
@@ -506,6 +570,22 @@ function stratafitness_customize_register($wp_customize) {
         $add_text('strata_rc_investment', "strata_rc_tier{$i}_freq", __("Tier {$i} Value", 'stratafitness'), $rc_tiers[$i][1]);
     }
 
+    // -- Quiz Section --
+    $wp_customize->add_section('strata_rc_quiz', array('title' => __('Quiz Section', 'stratafitness'), 'panel' => 'strata_rc_panel'));
+    $wp_customize->add_setting('strata_rc_quiz_enabled', array('default' => true, 'sanitize_callback' => 'wp_validate_boolean', 'transport' => 'refresh'));
+    $wp_customize->add_control('strata_rc_quiz_enabled', array('label' => __('Show Quiz Section', 'stratafitness'), 'section' => 'strata_rc_quiz', 'type' => 'checkbox'));
+    $add_text('strata_rc_quiz', 'strata_rc_quiz_title', __('Quiz Title', 'stratafitness'), 'CrossFit Athlete Performance Quiz');
+
+    // -- Final CTA Section --
+    $wp_customize->add_section('strata_rc_cta', array('title' => __('Final CTA Section', 'stratafitness'), 'panel' => 'strata_rc_panel'));
+    $add_text('strata_rc_cta', 'strata_rc_cta_eyebrow', __('Eyebrow', 'stratafitness'), '— APPLY');
+    $add_text('strata_rc_cta', 'strata_rc_cta_headline_1', __('Headline Line 1', 'stratafitness'), 'ENGINEER YOUR');
+    $add_text('strata_rc_cta', 'strata_rc_cta_headline_italic', __('Headline Italic', 'stratafitness'), 'progress.');
+    $add_textarea('strata_rc_cta', 'strata_rc_cta_desc', __('Description', 'stratafitness'), 'Book a 30-minute discovery call. We\'ll assess your current baseline, training history, and goals — then show you what your first 90 days under Strata\'s remote system look like.');
+    $add_text('strata_rc_cta', 'strata_rc_cta_btn_text', __('Primary Button Text', 'stratafitness'), 'BOOK DISCOVERY CALL');
+    $add_url('strata_rc_cta', 'strata_rc_cta_btn_url', __('Primary Button URL', 'stratafitness'), 'https://go.stratafitnesshk.com/remotecoachingcall');
+    $add_text('strata_rc_cta', 'strata_rc_cta_secondary_text', __('Secondary Button Text', 'stratafitness'), 'EXPLORE NUTRITION COACHING');
+
     $wp_customize->add_section('strata_rc_process', array('title' => __('Process Section', 'stratafitness'), 'panel' => 'strata_rc_panel'));
     $add_text('strata_rc_process', 'strata_rc_proc_eyebrow', __('Eyebrow', 'stratafitness'), '— THE PROCESS');
     $add_text('strata_rc_process', 'strata_rc_proc_headline_1', __('Headline Line 1', 'stratafitness'), 'THREE STEPS');
@@ -653,6 +733,8 @@ function stratafitness_customize_register($wp_customize) {
     $add_text('strata_home_creds', 'strata_home_creds_title', __('Title', 'stratafitness'), 'Educated by the Best.');
     $add_textarea('strata_home_creds', 'strata_home_creds_sub', __('Subtitle', 'stratafitness'), 'Certifications from the institutions that set the global standard for strength, mobility, sport, and nutrition.');
 
+    // --- Credential Logos managed via CPT "strata_credential" (see bottom of file) ---
+
     // --- Services Header ---
     $wp_customize->add_section('strata_home_services', array('title' => __('Services Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
     $add_text('strata_home_services', 'strata_home_services_eyebrow', __('Eyebrow', 'stratafitness'), '— Three Paths');
@@ -741,6 +823,16 @@ function stratafitness_customize_register($wp_customize) {
     $add_textarea('strata_home_philosophy', 'strata_home_philosophy_p2', __('Paragraph 2', 'stratafitness'), 'Whether you\'re a competitive athlete or an executive demanding peak physical condition, our standard remains exactly the same.');
     $add_text('strata_home_philosophy', 'strata_home_philosophy_cta_text', __('CTA Button Text', 'stratafitness'), 'Read Our Story');
     $add_url('strata_home_philosophy', 'strata_home_philosophy_cta_url', __('CTA Button URL', 'stratafitness'), '/about/');
+    // Philosophy pillars
+    $phil_pillars = array(
+        1 => array('Science-Led', 'Every programme is grounded in evidence-based sports science and biomechanics.'),
+        2 => array('Individually Built', 'No templates. Every protocol is engineered around your specific physiology and goals.'),
+        3 => array('Rigorously Accountable', 'We track, adjust, and push. Continuous improvement is non-negotiable.'),
+    );
+    foreach ($phil_pillars as $i => $p) {
+        $add_text('strata_home_philosophy', "strata_home_philosophy_pillar{$i}_title", sprintf(__('Pillar %d Title', 'stratafitness'), $i), $p[0]);
+        $add_textarea('strata_home_philosophy', "strata_home_philosophy_pillar{$i}_desc", sprintf(__('Pillar %d Description', 'stratafitness'), $i), $p[1]);
+    }
 
     // --- Testimonials Header ---
     $wp_customize->add_section('strata_home_testimonials', array('title' => __('Testimonials Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
@@ -978,6 +1070,73 @@ function stratafitness_get_testimonials($limit = 7) {
         wp_reset_postdata();
     }
     return $testimonials;
+}
+
+// ── Register Credential Logos Custom Post Type ──
+function stratafitness_register_credentials() {
+    $labels = array(
+        'name'               => __('Credential Logos', 'stratafitness'),
+        'singular_name'      => __('Credential Logo', 'stratafitness'),
+        'add_new'            => __('Add New', 'stratafitness'),
+        'add_new_item'       => __('Add New Credential Logo', 'stratafitness'),
+        'edit_item'          => __('Edit Credential Logo', 'stratafitness'),
+        'new_item'           => __('New Credential Logo', 'stratafitness'),
+        'view_item'          => __('View Credential Logo', 'stratafitness'),
+        'search_items'       => __('Search Credential Logos', 'stratafitness'),
+        'not_found'          => __('No credential logos found.', 'stratafitness'),
+        'not_found_in_trash' => __('No credential logos found in Trash.', 'stratafitness'),
+        'all_items'          => __('All Credential Logos', 'stratafitness'),
+        'menu_name'          => __('Credential Logos', 'stratafitness'),
+    );
+
+    $args = array(
+        'labels'              => $labels,
+        'public'              => false,
+        'publicly_queryable'  => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_nav_menus'   => false,
+        'show_in_rest'        => true,
+        'menu_position'       => 26,
+        'menu_icon'           => 'dashicons-images-alt2',
+        'hierarchical'        => false,
+        'supports'            => array('title', 'thumbnail', 'page-attributes'),
+        'has_archive'         => false,
+        'rewrite'             => false,
+        'delete_with_user'    => false,
+    );
+
+    register_post_type('strata_credential', $args);
+}
+add_action('init', 'stratafitness_register_credentials');
+
+// ── Helper: get credential logos (from CPT, sorted by menu order) ──
+function stratafitness_get_credential_logos() {
+    $query = new WP_Query(array(
+        'post_type'      => 'strata_credential',
+        'posts_per_page' => 50,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+        'no_found_rows'  => true,
+        'post_status'    => 'publish',
+    ));
+
+    $logos = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $thumb_id = get_post_thumbnail_id(get_the_ID());
+            if ($thumb_id) {
+                $logos[] = array(
+                    'post_id'  => get_the_ID(),
+                    'thumb_id' => $thumb_id,
+                );
+            }
+        }
+        wp_reset_postdata();
+    }
+
+    return $logos;
 }
 
 // ── Helper: get theme mod image URL (returns default if not set) ──

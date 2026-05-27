@@ -110,7 +110,7 @@ get_header();
 
           <div style="position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start;">
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase;"><?php echo esc_html(get_theme_mod('strata_rc_card_badge', 'Discipline 02')); ?></span>
-            <a href="<?php echo esc_html(get_theme_mod('strata_rc_card_apply_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_rc_card_apply_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
           </div>
 
           <div style="position: relative; z-index: 1;">
@@ -153,7 +153,7 @@ get_header();
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase; margin-bottom: 1rem; display: block;"><?php echo esc_html(get_theme_mod('strata_rc_inv_box_label', 'REMOTE COACHING')); ?></span>
             <h3 style="font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.01em;"><?php echo esc_html(get_theme_mod('strata_rc_inv_box_headline_1', 'ONE SUBSCRIPTION.')); ?><br><?php echo esc_html(get_theme_mod('strata_rc_inv_box_headline_2', 'FULL COACHING ACCESS.')); ?></h3>
             <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%;"><?php echo esc_html(get_theme_mod('strata_rc_inv_box_desc', 'Programming, video review, weekly check-ins, and direct messaging — bundled into a single flat monthly fee. No hidden fees. Pricing shared during your discovery call.')); ?></p>
-            <a href="<?php echo esc_html(get_theme_mod('strata_rc_inv_btn_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_rc_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_rc_inv_btn_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_rc_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
           </div>
 
           <!-- Tiers list -->
@@ -219,62 +219,33 @@ get_header();
     </div>
   </section>
 
-  <section class="section" style="background-color: #f3f1ec; padding: 6rem 0;">
+  <?php if (get_theme_mod('strata_rc_quiz_enabled', true)) : ?>
+  <section class="section section-quiz" id="athlete-quiz">
     <div class="container">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.5rem); text-transform: uppercase; margin-bottom: 2.5rem; color: #111; font-weight: 700; letter-spacing: -0.01em; text-align: center;">CROSSFIT ATHLETE PERFORMANCE QUIZ</h2>
-      <div id="quiz-smart-widget-a620aca2-2031-49ec-97cb-87b8306645c7" style="max-width: 960px; margin: 0 auto;"></div>
-      <script>
-        (function(){
-          var iframe=document.createElement('iframe');
-          iframe.src='https://quiz.thecollective.inc/q/a620aca2-2031-49ec-97cb-87b8306645c7?embed=true';
-          iframe.style.width='100%';
-          iframe.style.minHeight='800px';
-          iframe.style.border='none';
-          iframe.style.borderRadius='12px';
-          iframe.id='quiz-smart-frame-a620aca2-2031-49ec-97cb-87b8306645c7';
-          iframe.loading='lazy';
-          document.getElementById('quiz-smart-widget-a620aca2-2031-49ec-97cb-87b8306645c7').appendChild(iframe);
-          window.addEventListener('message',function(e){
-            if(e.data.type==='quizAI:resize'){iframe.style.height=e.data.height+'px';}
-            if(e.data.type==='quizAI:trackingEvent'&&e.source===iframe.contentWindow&&e.data.quizId==='a620aca2-2031-49ec-97cb-87b8306645c7'){
-              var d=e.data;
-              var mp={content_name:'quiz_lead',value:d.value||0,currency:'USD'};
-              if(d.hashedEmail){mp.em=d.hashedEmail;}
-              if(d.hashedPhone){mp.ph=d.hashedPhone;}
-              if(typeof fbq==='function'){fbq('track','Lead',mp,{eventID:d.eventId});}
-              var gp={value:d.value||0,currency:'USD',transaction_id:d.eventId,method:'quiz'};
-              if(d.hashedEmail){gp.sha256_email_address=d.hashedEmail;}
-              if(d.hashedPhone){gp.sha256_phone_number=d.hashedPhone;}
-              if(typeof gtag==='function'){gtag('event','generate_lead',gp);}
-              if(typeof ttq!=='undefined'&&ttq&&typeof ttq.track==='function'){
-                if(d.hashedEmail&&typeof ttq.identify==='function'){ttq.identify({sha256_email:d.hashedEmail,sha256_phone_number:d.hashedPhone||''});}
-                ttq.track('SubmitForm',{value:d.value||0,currency:'USD',event_id:d.eventId});
-              }
-            }
-          });
-        })();
-      </script>
+      <h2 class="quiz-title"><?php echo esc_html(get_theme_mod('strata_rc_quiz_title', __('CrossFit Athlete Performance Quiz', 'stratafitness'))); ?></h2>
+      <div id="quiz-smart-widget-a620aca2-2031-49ec-97cb-87b8306645c7" class="quiz-widget"></div>
     </div>
   </section>
+  <?php endif; ?>
 
   <!-- FINAL CTA SECTION -->
   <section class="section" style="padding: 8rem 0 10rem; text-align: center;">
     <div class="container">
       <div data-reveal>
-        <span class="eyebrow" style="margin-bottom: 1.5rem; display: inline-block; color: var(--color-red);">— APPLY</span>
+        <span class="eyebrow" style="margin-bottom: 1.5rem; display: inline-block; color: var(--color-red);"><?php echo esc_html(get_theme_mod('strata_rc_cta_eyebrow', __('— APPLY', 'stratafitness'))); ?></span>
         <h2 style="font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6.5rem); text-transform: uppercase; line-height: 0.95; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
-          ENGINEER YOUR <br>
-          <em style="color: var(--color-red); text-transform: lowercase; font-style: italic; font-weight: 500;">progress.</em>
+          <?php echo esc_html(get_theme_mod('strata_rc_cta_headline_1', __('ENGINEER YOUR', 'stratafitness'))); ?> <br>
+          <em style="color: var(--color-red); text-transform: lowercase; font-style: italic; font-weight: 500;"><?php echo esc_html(get_theme_mod('strata_rc_cta_headline_italic', __('progress.', 'stratafitness'))); ?></em>
         </h2>
         <p style="color: var(--color-text-dim); max-width: 600px; margin: 0 auto 3.5rem; line-height: 1.7; font-size: 1.05rem;">
-          Book a 30-minute discovery call. We'll assess your current baseline, training history, and goals — then show you what your first 90 days under Strata's remote system look like.
+          <?php echo esc_html(get_theme_mod('strata_rc_cta_desc', __('Book a 30-minute discovery call. We\'ll assess your current baseline, training history, and goals — then show you what your first 90 days under Strata\'s remote system look like.', 'stratafitness'))); ?>
         </p>
         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <a href="https://go.stratafitnesshk.com/remotecoachingcall" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
-            BOOK DISCOVERY CALL &rarr;
+          <a href="<?php echo esc_url(get_theme_mod('strata_rc_cta_btn_url', 'https://go.stratafitnesshk.com/remotecoachingcall')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+            <?php echo esc_html(get_theme_mod('strata_rc_cta_btn_text', __('BOOK DISCOVERY CALL', 'stratafitness'))); ?> &rarr;
           </a>
-          <a href="<?php echo home_url('/nutrition-coaching/'); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
-            EXPLORE NUTRITION COACHING
+          <a href="<?php echo esc_url(home_url('/nutrition-coaching/')); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+            <?php echo esc_html(get_theme_mod('strata_rc_cta_secondary_text', __('EXPLORE NUTRITION COACHING', 'stratafitness'))); ?>
           </a>
         </div>
       </div>

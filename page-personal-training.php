@@ -110,7 +110,7 @@ get_header();
 
           <div style="position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start;">
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase;"><?php echo esc_html(get_theme_mod('strata_pt_card_badge', 'Discipline 01')); ?></span>
-            <a href="<?php echo esc_html(get_theme_mod('strata_pt_card_apply_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_pt_card_apply_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
           </div>
 
           <div style="position: relative; z-index: 1;">
@@ -153,7 +153,7 @@ get_header();
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase; margin-bottom: 1rem; display: block;"><?php echo esc_html(get_theme_mod('strata_pt_inv_box_label', 'PERSONAL TRAINING')); ?></span>
             <h3 style="font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.01em;"><?php echo esc_html(get_theme_mod('strata_pt_inv_box_headline_1', 'MONTHLY RETAINER.')); ?><br><?php echo esc_html(get_theme_mod('strata_pt_inv_box_headline_2', 'QUARTERLY COMMITMENT.')); ?></h3>
             <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%;"><?php echo esc_html(get_theme_mod('strata_pt_inv_box_desc', 'Choose the frequency that matches your goal. Pricing tiers vary based on weekly session volume. Detailed pricing shared during your consultation — built around your training prescription.')); ?></p>
-            <a href="<?php echo esc_html(get_theme_mod('strata_pt_inv_btn_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_pt_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_pt_inv_btn_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_pt_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
           </div>
 
           <!-- Tiers list -->
@@ -221,10 +221,10 @@ get_header();
           <?php echo esc_html(get_theme_mod('strata_pt_cta_desc', 'Book a 30-minute consultation. We\'ll assess your current baseline, training history, and goals — then show you what your first 90 days under Strata\'s training system look like.')); ?>
         </p>
         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <a href="<?php echo esc_html(get_theme_mod('strata_pt_cta_btn_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+          <a href="<?php echo esc_url(get_theme_mod('strata_pt_cta_btn_url', 'https://go.stratafitnesshk.com/30-min-consult-assessment')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
             <?php echo esc_html(get_theme_mod('strata_pt_cta_btn_text', 'BOOK CONSULTATION')); ?> &rarr;
           </a>
-          <a href="<?php echo home_url('/remote-coaching/'); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+          <a href="<?php echo esc_url(home_url('/remote-coaching/')); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
             <?php echo esc_html(get_theme_mod('strata_pt_cta_secondary_text', 'EXPLORE REMOTE COACHING')); ?>
           </a>
         </div>
