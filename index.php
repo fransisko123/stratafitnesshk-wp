@@ -87,18 +87,30 @@ get_header();
       </div>
 
       <!-- Logo marquee -->
-      <div class="logos-marquee" aria-label="Certification logos" role="region">
+      <?php
+      $cred_logos = stratafitness_get_credential_logos();
+      if (!empty($cred_logos)) : ?>
+      <div class="logos-marquee" aria-label="<?php esc_attr_e('Certification logos', 'stratafitness'); ?>" role="region">
         <div class="logos-track" aria-hidden="true">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo1.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo2.png" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo3.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/logos/logo4.svg" alt="" width="120" height="28" loading="lazy" decoding="async">
+          <?php
+          // Duplicate logos for seamless infinite scroll
+          $marquee_logos = array_merge($cred_logos, $cred_logos);
+          foreach ($marquee_logos as $logo) :
+              $logo_url = wp_get_attachment_image_url($logo['thumb_id'], 'medium');
+              $logo_alt = get_post_meta($logo['thumb_id'], '_wp_attachment_image_alt', true);
+              if (!$logo_alt) {
+                  $logo_alt = get_the_title($logo['post_id']) ?: __('Certification logo', 'stratafitness');
+              }
+              if ($logo_url) :
+          ?>
+            <img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr($logo_alt); ?>" width="120" height="28" loading="lazy" decoding="async">
+          <?php
+              endif;
+          endforeach;
+          ?>
         </div>
       </div>
+      <?php endif; ?>
     </div>
   </section>
 
@@ -319,18 +331,18 @@ get_header();
       <div class="philosophy-pillars" data-stagger data-delay="150">
         <div class="pillar" id="pillar-science">
           <span class="pillar-num">—</span>
-          <h4>Science-Led</h4>
-          <p>Every programme is grounded in evidence-based sports science and biomechanics.</p>
+          <h4><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar1_title', __('Science-Led', 'stratafitness'))); ?></h4>
+          <p><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar1_desc', __('Every programme is grounded in evidence-based sports science and biomechanics.', 'stratafitness'))); ?></p>
         </div>
         <div class="pillar" id="pillar-individual">
           <span class="pillar-num">—</span>
-          <h4>Individually Built</h4>
-          <p>No templates. Every protocol is engineered around your specific physiology and goals.</p>
+          <h4><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar2_title', __('Individually Built', 'stratafitness'))); ?></h4>
+          <p><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar2_desc', __('No templates. Every protocol is engineered around your specific physiology and goals.', 'stratafitness'))); ?></p>
         </div>
         <div class="pillar" id="pillar-accountable">
           <span class="pillar-num">—</span>
-          <h4>Rigorously Accountable</h4>
-          <p>We track, adjust, and push. Continuous improvement is non-negotiable.</p>
+          <h4><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar3_title', __('Rigorously Accountable', 'stratafitness'))); ?></h4>
+          <p><?php echo esc_html(get_theme_mod('strata_home_philosophy_pillar3_desc', __('We track, adjust, and push. Continuous improvement is non-negotiable.', 'stratafitness'))); ?></p>
         </div>
       </div>
     </div>
@@ -439,17 +451,17 @@ get_header();
           <form class="apply-form" style="position: relative; z-index: 1;">
             <div class="form-row">
               <div class="form-group">
-                <label for="apply-name">FULL NAME</label>
-                <input type="text" id="apply-name" placeholder="Your full name" required>
+                <label for="apply-name"><?php esc_html_e('FULL NAME', 'stratafitness'); ?></label>
+                <input type="text" id="apply-name" name="apply-name" placeholder="<?php esc_attr_e('Your full name', 'stratafitness'); ?>" required>
               </div>
               <div class="form-group">
-                <label for="apply-email">EMAIL</label>
-                <input type="email" id="apply-email" placeholder="you@example.com" required>
+                <label for="apply-email"><?php esc_html_e('EMAIL', 'stratafitness'); ?></label>
+                <input type="email" id="apply-email" name="apply-email" placeholder="<?php esc_attr_e('you@example.com', 'stratafitness'); ?>" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label>DISCIPLINE OF INTEREST</label>
+              <label><?php esc_html_e('DISCIPLINE OF INTEREST', 'stratafitness'); ?></label>
               <div class="discipline-radios">
                 <label class="radio-btn">
                   <input type="radio" name="discipline" value="pt" checked>
@@ -467,13 +479,13 @@ get_header();
             </div>
 
             <div class="form-group">
-              <label for="apply-goals">TELL US ABOUT YOUR GOALS</label>
-              <textarea id="apply-goals" rows="4" placeholder="Training history, injuries, what you're chasing..." required></textarea>
+              <label for="apply-goals"><?php esc_html_e('TELL US ABOUT YOUR GOALS', 'stratafitness'); ?></label>
+              <textarea id="apply-goals" name="apply-goals" rows="4" placeholder="<?php esc_attr_e('Training history, injuries, what you\'re chasing...', 'stratafitness'); ?>" required></textarea>
             </div>
 
             <!-- Honeypot: invisible to humans, bots will fill it -->
             <div style="position:absolute;left:-9999px;" aria-hidden="true">
-              <label for="apply-website">Website</label>
+              <label for="apply-website"><?php esc_html_e('Website', 'stratafitness'); ?></label>
               <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off">
             </div>
 

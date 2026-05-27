@@ -109,7 +109,7 @@ get_header();
 
           <div style="position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start;">
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase;"><?php echo esc_html(get_theme_mod('strata_nc_card_badge', 'Discipline 03')); ?></span>
-            <a href="<?php echo esc_html(get_theme_mod('strata_nc_card_apply_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_nc_card_apply_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.65rem; height: auto;">APPLY &rarr;</a>
           </div>
 
           <div style="position: relative; z-index: 1;">
@@ -152,7 +152,7 @@ get_header();
             <span style="font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 0.15em; color: var(--color-red); text-transform: uppercase; margin-bottom: 1rem; display: block;"><?php echo esc_html(get_theme_mod('strata_nc_inv_box_label', 'NUTRITION COACHING')); ?></span>
             <h3 style="font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.01em;"><?php echo esc_html(get_theme_mod('strata_nc_inv_box_headline_1', 'STANDALONE OR')); ?><br><?php echo esc_html(get_theme_mod('strata_nc_inv_box_headline_2', 'BUNDLED.')); ?></h3>
             <p style="color: var(--color-text-dim); font-size: 0.95rem; line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%;"><?php echo esc_html(get_theme_mod('strata_nc_inv_box_desc', 'Available as a standalone service or bundled with Personal Training or Remote Coaching. 3-month minimum is required to assess true metabolic response.')); ?></p>
-            <a href="<?php echo esc_html(get_theme_mod('strata_nc_inv_btn_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_nc_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
+            <a href="<?php echo esc_url(get_theme_mod('strata_nc_inv_btn_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary"><?php echo esc_html(get_theme_mod('strata_nc_inv_btn_text', 'GET PRICING')); ?> &rarr;</a>
           </div>
 
           <!-- Tiers list -->
@@ -227,10 +227,10 @@ get_header();
           <?php echo esc_html(get_theme_mod('strata_nc_cta_desc', 'Book a 30-minute discovery call. We\'ll assess your current metabolic state, dieting history, and goals — then show you what your first 90 days under Strata\'s nutrition system look like.')); ?>
         </p>
         <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; align-items: center;">
-          <a href="<?php echo esc_html(get_theme_mod('strata_nc_cta_btn_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+          <a href="<?php echo esc_url(get_theme_mod('strata_nc_cta_btn_url', 'https://go.stratafitnesshk.com/nutrition-discovery-call')); ?>" target="_blank" rel="noopener" class="btn btn-primary" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
             <?php echo esc_html(get_theme_mod('strata_nc_cta_btn_text', 'BOOK DISCOVERY CALL')); ?> &rarr;
           </a>
-          <a href="<?php echo home_url('/personal-training/'); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
+          <a href="<?php echo esc_url(home_url('/personal-training/')); ?>" class="btn btn-ghost" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.2rem 2.4rem;">
             <?php echo esc_html(get_theme_mod('strata_nc_cta_secondary_text', 'EXPLORE PERSONAL TRAINING')); ?>
           </a>
         </div>
