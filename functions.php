@@ -84,6 +84,12 @@ function stratafitness_enqueue_assets() {
         STRATA_VERSION,
         true
     );
+
+    // Pass AJAX URL & nonce to script
+    wp_localize_script('stratafitness-script', 'StrataAjax', array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('strata_apply_form'),
+    ));
 }
 add_action('wp_enqueue_scripts', 'stratafitness_enqueue_assets');
 
@@ -170,12 +176,88 @@ function stratafitness_dequeue_block_styles() {
 }
 add_action('wp_enqueue_scripts', 'stratafitness_dequeue_block_styles', 100);
 
+// ── Mailtrap SMTP (local development only) ──
+function stratafitness_mailtrap_smtp($phpmailer) {
+    $phpmailer->isSMTP();
+    $phpmailer->Host       = 'sandbox.smtp.mailtrap.io';
+    $phpmailer->SMTPAuth   = true;
+    $phpmailer->Port       = 2525;
+    $phpmailer->Username   = '19ef6fff75e149';
+    $phpmailer->Password   = '138c474d1057be';
+    $phpmailer->SMTPSecure = 'tls'; // Mailtrap sandbox uses STARTTLS on port 2525
+}
+add_action('phpmailer_init', 'stratafitness_mailtrap_smtp');
+
 // ── Allow SVG uploads ──
 function stratafitness_allow_svg($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
 add_filter('upload_mimes', 'stratafitness_allow_svg');
+
+// ── Apply Form: AJAX Handler ──
+function stratafitness_handle_apply_form() {
+    // Verify nonce
+    if (!isset($_POST['strata_apply_nonce']) || !wp_verify_nonce($_POST['strata_apply_nonce'], 'strata_apply_form')) {
+        wp_send_json_error(array('message' => __('Security check failed. Please refresh the page and try again.', 'stratafitness')));
+    }
+
+    // Honeypot check
+    if (!empty($_POST['website'])) {
+        // Silently succeed so bots don't know they were caught
+        wp_send_json_success(array('message' => __('Thank you! Your application has been sent.', 'stratafitness')));
+    }
+
+    // Sanitize & validate inputs
+    $name       = isset($_POST['name']) ? sanitize_text_field(wp_unslash($_POST['name'])) : '';
+    $email      = isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '';
+    $discipline = isset($_POST['discipline']) ? sanitize_text_field(wp_unslash($_POST['discipline'])) : '';
+    $goals      = isset($_POST['goals']) ? sanitize_textarea_field(wp_unslash($_POST['goals'])) : '';
+
+    if (empty($name) || empty($email) || empty($goals)) {
+        wp_send_json_error(array('message' => __('Please fill in all required fields.', 'stratafitness')));
+    }
+
+    if (!is_email($email)) {
+        wp_send_json_error(array('message' => __('Please enter a valid email address.', 'stratafitness')));
+    }
+
+    // Build email
+    $discipline_labels = array(
+        'pt' => 'Personal Training',
+        'rc' => 'Remote Coaching',
+        'nc' => 'Nutrition Coaching',
+    );
+    $discipline_label = isset($discipline_labels[$discipline]) ? $discipline_labels[$discipline] : $discipline;
+
+    $to      = get_theme_mod('strata_home_apply_direct_email', 'jon@stratafitnesshk.com');
+    $subject = sprintf('[Strata] New Application from %s — %s', $name, $discipline_label);
+
+    $body  = "NEW COACHING APPLICATION\n";
+    $body .= "=======================\n\n";
+    $body .= "Name:       {$name}\n";
+    $body .= "Email:      {$email}\n";
+    $body .= "Discipline: {$discipline_label}\n\n";
+    $body .= "GOALS / NOTES:\n";
+    $body .= "--------------\n";
+    $body .= $goals . "\n\n";
+    $body .= "— Sent from Strata Fitness Website\n";
+
+    $headers = array(
+        'Content-Type: text/plain; charset=UTF-8',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    $sent = wp_mail($to, $subject, $body, $headers);
+
+    if ($sent) {
+        wp_send_json_success(array('message' => __('Thank you! Your application has been sent. We\'ll get back to you within 24 hours.', 'stratafitness')));
+    } else {
+        wp_send_json_error(array('message' => __('Sorry, something went wrong. Please email us directly at ', 'stratafitness') . $to));
+    }
+}
+add_action('wp_ajax_strata_apply_form', 'stratafitness_handle_apply_form');
+add_action('wp_ajax_nopriv_strata_apply_form', 'stratafitness_handle_apply_form');
 
 // ── Theme Customizer: editable text & images for every page ──
 function stratafitness_customize_register($wp_customize) {

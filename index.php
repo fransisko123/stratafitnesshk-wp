@@ -471,6 +471,14 @@ get_header();
               <textarea id="apply-goals" rows="4" placeholder="Training history, injuries, what you're chasing..." required></textarea>
             </div>
 
+            <!-- Honeypot: invisible to humans, bots will fill it -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <label for="apply-website">Website</label>
+              <input type="text" id="apply-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <?php wp_nonce_field('strata_apply_form', 'strata_apply_nonce'); ?>
+
             <button type="submit" class="btn btn-primary submit-btn"><?php echo esc_html(get_theme_mod('strata_home_apply_submit_text', 'Send Application')); ?></button>
           </form>
         </div>

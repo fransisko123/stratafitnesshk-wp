@@ -421,4 +421,71 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ─────────────────────────────────────────────────────────────
+     9. APPLY FORM — AJAX submission
+  ───────────────────────────────────────────────────────────── */
+  const applyForm = document.querySelector('.apply-form');
+
+  if (applyForm) {
+    applyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = applyForm.querySelector('.submit-btn');
+      const originalBtnText = submitBtn.textContent;
+
+      // Remove any existing feedback message
+      const existingMsg = applyForm.querySelector('.form-feedback');
+      if (existingMsg) existingMsg.remove();
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      // Gather form data
+      const formData = new FormData();
+      formData.append('action', 'strata_apply_form');
+      formData.append('strata_apply_nonce', StrataAjax.nonce);
+      formData.append('name', applyForm.querySelector('#apply-name').value.trim());
+      formData.append('email', applyForm.querySelector('#apply-email').value.trim());
+      formData.append('discipline', applyForm.querySelector('input[name="discipline"]:checked')?.value || '');
+      formData.append('goals', applyForm.querySelector('#apply-goals').value.trim());
+      // Honeypot — leave empty
+      formData.append('website', '');
+
+      try {
+        const response = await fetch(StrataAjax.ajaxUrl, {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        // Show feedback message
+        const feedback = document.createElement('div');
+        feedback.className = 'form-feedback';
+        feedback.textContent = result.data?.message || 'Something went wrong.';
+        feedback.style.cssText = result.success
+          ? 'color: #10b981; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); border-radius: 6px;'
+          : 'color: #ef4444; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 6px;';
+
+        applyForm.appendChild(feedback);
+
+        if (result.success) {
+          // Reset form
+          applyForm.reset();
+        }
+      } catch (err) {
+        const feedback = document.createElement('div');
+        feedback.className = 'form-feedback';
+        feedback.textContent = 'Network error. Please try again.';
+        feedback.style.cssText = 'color: #ef4444; font-size: 0.875rem; margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 6px;';
+        applyForm.appendChild(feedback);
+      } finally {
+        // Restore button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
+    });
+  }
+
 });
