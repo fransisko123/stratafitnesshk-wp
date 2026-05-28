@@ -355,7 +355,7 @@ get_header();
     <div class="container">
       <div class="testimonials-header" data-reveal>
         <span class="eyebrow"><?php echo esc_html(get_theme_mod('strata_home_testimonials_eyebrow', '— The Results')); ?></span>
-        <h2 class="testimonials-headline"><?php echo esc_html(get_theme_mod('strata_home_testimonials_headline', 'Voices from the floor.')); ?></h2>
+        <h2 class="testimonials-headline"><?php echo esc_html(get_theme_mod('strata_home_testimonials_headline_1', 'Voices from the')); ?><br><em><?php echo esc_html(get_theme_mod('strata_home_testimonials_headline_2', 'Floor.')); ?></em></h2>
         <p class="testimonials-sub"><?php echo esc_html(get_theme_mod('strata_home_testimonials_sub', 'Athletes. One standard. Real words from clients who turned up — and turned around.')); ?></p>
       </div>
     </div>

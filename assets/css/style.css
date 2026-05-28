@@ -1728,7 +1728,7 @@ a {
 
 .testimonials-sub {
   font-size: 0.9rem;
-  color: rgba(26, 26, 26, 0.45);
+  color: var(--color-text-muted);
   max-width: none;
   margin: 0;
   letter-spacing: 0.02em;

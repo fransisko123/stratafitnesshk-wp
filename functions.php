@@ -837,7 +837,8 @@ function stratafitness_customize_register($wp_customize) {
     // --- Testimonials Header ---
     $wp_customize->add_section('strata_home_testimonials', array('title' => __('Testimonials Header', 'stratafitness'), 'panel' => 'strata_home_panel'));
     $add_text('strata_home_testimonials', 'strata_home_testimonials_eyebrow', __('Eyebrow', 'stratafitness'), '— The Results');
-    $add_text('strata_home_testimonials', 'strata_home_testimonials_headline', __('Headline', 'stratafitness'), 'Voices from the floor.');
+    $add_text('strata_home_testimonials', 'strata_home_testimonials_headline_1', __('Headline Line 1', 'stratafitness'), 'Voices from the');
+    $add_text('strata_home_testimonials', 'strata_home_testimonials_headline_2', __('Headline Line 2 (red italic)', 'stratafitness'), 'floor.');
     $add_textarea('strata_home_testimonials', 'strata_home_testimonials_sub', __('Subtitle', 'stratafitness'), 'Athletes. One standard. Real words from clients who turned up — and turned around.');
 
     // --- Apply Section ---
