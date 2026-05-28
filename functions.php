@@ -840,27 +840,6 @@ function stratafitness_customize_register($wp_customize) {
     $add_text('strata_home_testimonials', 'strata_home_testimonials_headline', __('Headline', 'stratafitness'), 'Voices from the floor.');
     $add_textarea('strata_home_testimonials', 'strata_home_testimonials_sub', __('Subtitle', 'stratafitness'), 'Athletes. One standard. Real words from clients who turned up — and turned around.');
 
-    // --- Testimonial Cards (7 cards) ---
-    $testimonials_defaults = array(
-        array('quote' => 'Excellent strength training.', 'msg' => '"Such a positive experience with Jonathan. He guided me through excellent strength training workouts, and I\'m so proud of the progress I made."', 'client' => 'Sabrina Anderson', 'label' => 'Personal Training'),
-        array('quote' => 'Real results — finally.', 'msg' => '"Jon helped resolve my chronic low back pain, and I\'ve felt significantly stronger since. His warm-ups are exceptionally well thought out."', 'client' => 'Janet', 'label' => 'Personal Training'),
-        array('quote' => 'Stronger. No injuries.', 'msg' => '"I\'ve been training with Jon for over a year and have never felt stronger without getting injured. I now fully trust him with both my training and my health."', 'client' => 'Hind El Hathout', 'label' => 'Personal Training'),
-        array('quote' => 'Holistic & motivating.', 'msg' => '"Jon has been my trainer for over a year, and I continue to see steady progress. His positive and motivating approach makes training enjoyable without unnecessary pressure."', 'client' => 'Michelle', 'label' => 'Personal Training'),
-        array('quote' => 'Structure that actually works.', 'msg' => '"Jon\'s patience, attention to detail, and ability to demonstrate and refine movements stood out. I highly recommend Coach Jon Miller."', 'client' => 'Walter', 'label' => 'Personal Training'),
-        array('quote' => 'Individualized from day one.', 'msg' => '"Jon takes a highly personalized approach and creates consistently engaging programs. He also adapts training effectively around injuries to support recovery."', 'client' => 'Yasmin', 'label' => 'Personal Training'),
-        array('quote' => 'PRs at 43. No plateaus.', 'msg' => '"I\'m stronger than ever at 43, hitting PRs across multiple lifts. His varied and engaging programming has made training enjoyable and consistent."', 'client' => 'Avishay', 'label' => 'Remote Coaching'),
-    );
-
-    foreach ($testimonials_defaults as $i => $t) {
-        $n = $i + 1;
-        $wp_customize->add_section("strata_home_t_{$n}", array('title' => sprintf(__('Testimonial %d', 'stratafitness'), $n), 'panel' => 'strata_home_panel'));
-        $add_image("strata_home_t_{$n}", "strata_home_t_{$n}_bg", __('Background Image', 'stratafitness'));
-        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_quote", __('Quote Label', 'stratafitness'), $t['quote']);
-        $add_textarea("strata_home_t_{$n}", "strata_home_t_{$n}_msg", __('Message', 'stratafitness'), $t['msg']);
-        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_client", __('Client Name', 'stratafitness'), $t['client']);
-        $add_text("strata_home_t_{$n}", "strata_home_t_{$n}_label", __('Client Label', 'stratafitness'), $t['label']);
-    }
-
     // --- Apply Section ---
     $wp_customize->add_section('strata_home_apply', array('title' => __('Apply Section', 'stratafitness'), 'panel' => 'strata_home_panel'));
     $add_text('strata_home_apply', 'strata_home_apply_eyebrow', __('Eyebrow', 'stratafitness'), '— Get In Touch');
