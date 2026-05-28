@@ -3108,3 +3108,79 @@ a.contact-info-value:hover {
 .skip-link:focus {
   top: 0;
 }
+
+/* ======================================================================
+   MOBILE: Investment / Pricing Cards (all coaching pages)
+   Fixes text overflow on tier rows, grid stacking, and sticky cards.
+   ====================================================================== */
+@media (max-width: 768px) {
+  /* Force ALL grid-2 to single column on mobile (not just inside .card) */
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Tier rows: allow text wrapping, reduce gap */
+  .grid-2 div[style*="display: flex"][style*="justify-content: space-between"][style*="border-bottom"],
+  .card div[style*="display: flex"][style*="justify-content: space-between"] {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Reduce tier name size so long text like "+ PERSONAL TRAINING" fits */
+  .grid-2 span[style*="font-size: 1.25rem"] {
+    font-size: 1rem !important;
+  }
+
+  /* Tier frequency/value label */
+  .grid-2 span[style*="font-size: 0.85rem"][style*="letter-spacing: 0.1em"] {
+    font-size: 0.75rem !important;
+  }
+
+  /* Pricing box headline */
+  .card h3[style*="font-size: 2rem"] {
+    font-size: 1.35rem !important;
+  }
+
+  /* Reduce card padding on tablets */
+  .card[style*="padding: var(--spacing-lg)"] {
+    padding: 2rem !important;
+  }
+
+  /* Sticky side card: remove sticky + aspect-ratio on mobile */
+  .card[style*="position: sticky"],
+  .card[style*="position:sticky"] {
+    position: relative !important;
+    top: auto !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: 300px;
+    margin-top: 2rem;
+  }
+
+  /* Includes section: reduce heading margin */
+  .grid-2 h2[style*="margin-bottom: 4rem"] {
+    margin-bottom: 2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller tier text for very narrow screens */
+  .grid-2 span[style*="font-size: 1.25rem"] {
+    font-size: 0.85rem !important;
+  }
+
+  /* Compact card padding */
+  .card[style*="padding: var(--spacing-lg)"] {
+    padding: 1.25rem !important;
+  }
+
+  .card[style*="padding: 3rem"] {
+    padding: 1.5rem !important;
+  }
+
+  /* Tier row gap */
+  .grid-2 div[style*="display: flex"][style*="justify-content: space-between"] {
+    padding-bottom: 1rem !important;
+  }
+}
