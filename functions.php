@@ -1229,3 +1229,68 @@ function stratafitness_maybe_create_pages() {
     }
 }
 add_action('admin_init', 'stratafitness_maybe_create_pages');
+
+// ── Auto Clear & Preload WP Rocket Cache ──
+function stratafitness_auto_clear_rocket_cache($post_id, $post = null) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if ($post && $post->post_status === 'auto-draft') return;
+    if (wp_is_post_revision($post_id)) return;
+
+    // Clear cache spesifik halaman/post
+    if (function_exists('rocket_clean_post')) {
+        rocket_clean_post($post_id);
+    }
+
+    // Clear halaman-halaman yang menampilkan CPT (homepage, dll)
+    if (function_exists('rocket_clean_domain')) {
+        rocket_clean_domain();
+    }
+
+    stratafitness_rocket_preload();
+}
+
+function stratafitness_auto_clear_rocket_cache_all() {
+    if (function_exists('rocket_clean_domain')) {
+        rocket_clean_domain();
+    }
+    stratafitness_rocket_preload();
+}
+
+function stratafitness_rocket_preload() {
+    if (function_exists('run_rocket_sitemap_preload')) {
+        run_rocket_sitemap_preload();
+    }
+}
+
+// Post / Page biasa
+add_action('save_post', 'stratafitness_auto_clear_rocket_cache', 10, 2);
+add_action('deleted_post', 'stratafitness_auto_clear_rocket_cache_all');
+add_action('trashed_post', 'stratafitness_auto_clear_rocket_cache_all');
+
+// Custom Post Types: Testimonials & Credentials
+add_action('save_post_strata_testimonial', 'stratafitness_auto_clear_rocket_cache_all');
+add_action('save_post_strata_credential',  'stratafitness_auto_clear_rocket_cache_all');
+
+// Taxonomy / Term
+add_action('edited_term',  'stratafitness_auto_clear_rocket_cache_all');
+add_action('created_term', 'stratafitness_auto_clear_rocket_cache_all');
+add_action('delete_term',  'stratafitness_auto_clear_rocket_cache_all');
+
+// Menu
+add_action('wp_update_nav_menu', 'stratafitness_auto_clear_rocket_cache_all');
+
+// Theme Customizer — clear saat save perubahan customizer
+add_action('customize_save_after', 'stratafitness_auto_clear_rocket_cache_all');
+
+// Clear cache when plugin/theme is updated
+add_action('upgrader_process_complete',      'stratafitness_auto_clear_rocket_cache_all');
+
+// Clear cache when theme file is saved via Theme Editor
+add_action('wp_ajax_edit-theme-plugin-file', 'stratafitness_auto_clear_rocket_cache_all', 1);
+
+// Clear cache when a plugin is activated or deactivated
+add_action('activated_plugin',               'stratafitness_auto_clear_rocket_cache_all');
+add_action('deactivated_plugin',             'stratafitness_auto_clear_rocket_cache_all');
+
+// Clear cache when theme is switched
+add_action('switch_theme',                   'stratafitness_auto_clear_rocket_cache_all');
