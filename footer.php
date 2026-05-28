@@ -11,9 +11,9 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.webp'); ?>" alt="<?php esc_attr_e('Strata Fitness', 'stratafitness'); ?>" width="500" height="154" loading="lazy" decoding="async">
-          </div>
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="footer-logo" aria-label="<?php esc_attr_e('Strata Fitness — Home', 'stratafitness'); ?>">
+            <img src="<?php echo esc_url(strata_theme_image('strata_site_logo', '/assets/images/logo.webp')); ?>" alt="<?php echo esc_attr(get_theme_mod('strata_site_logo_alt', 'Strata Fitness')); ?>" width="500" height="154" loading="lazy" decoding="async">
+          </a>
           <p class="footer-tagline"><?php esc_html_e('Premium fitness and performance coaching for those who demand more.', 'stratafitness'); ?></p>
           <a href="https://www.instagram.com/coachjonmiller/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="<?php esc_attr_e('Follow Strata Fitness on Instagram @coachjonmiller', 'stratafitness'); ?>">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-instagram" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>

@@ -357,7 +357,7 @@ function stratafitness_customize_register($wp_customize) {
 
     $add_image = function($section, $id, $label) use ($wp_customize) {
         $wp_customize->add_setting($id, array(
-            'default'           => '',
+            'default'           => 0,
             'sanitize_callback' => 'absint',
             'transport'         => 'refresh',
         ));
@@ -696,6 +696,17 @@ function stratafitness_customize_register($wp_customize) {
     $add_text('strata_nc_cta', 'strata_nc_cta_btn_text', __('Primary Button Text', 'stratafitness'), 'BOOK DISCOVERY CALL');
     $add_url('strata_nc_cta', 'strata_nc_cta_btn_url', __('Primary Button URL', 'stratafitness'), 'https://go.stratafitnesshk.com/nutrition-discovery-call');
     $add_text('strata_nc_cta', 'strata_nc_cta_secondary_text', __('Secondary Button Text', 'stratafitness'), 'EXPLORE PERSONAL TRAINING');
+
+    // ================================================================
+    //  SECTION: Website Logo
+    // ================================================================
+    $wp_customize->add_section('strata_site_identity', array(
+        'title'    => __('Website Logo', 'stratafitness'),
+        'priority' => 128,
+    ));
+    $add_image('strata_site_identity', 'strata_site_logo', __('Site Logo (used in header & footer)', 'stratafitness'));
+    $add_image('strata_site_identity', 'strata_site_logo_dark', __('Dark Logo (for light/scroll background in navbar)', 'stratafitness'));
+    $add_text('strata_site_identity', 'strata_site_logo_alt', __('Logo Alt Text', 'stratafitness'), 'Strata Fitness');
 
     // ================================================================
     //  PANEL: Homepage
@@ -1121,9 +1132,9 @@ function stratafitness_get_credential_logos() {
 
 // ── Helper: get theme mod image URL (returns default if not set) ──
 function strata_theme_image($setting, $default_rel_path) {
-    $img_id = get_theme_mod($setting, '');
-    if ($img_id) {
-        $url = wp_get_attachment_url((int) $img_id);
+    $img_id = absint(get_theme_mod($setting, 0));
+    if ($img_id > 0) {
+        $url = wp_get_attachment_url($img_id);
         if ($url) return $url;
     }
     return get_template_directory_uri() . $default_rel_path;
@@ -1131,9 +1142,9 @@ function strata_theme_image($setting, $default_rel_path) {
 
 // ── Helper: get theme mod image URL with absolute URL fallback ──
 function strata_theme_image_url($setting, $default_url) {
-    $img_id = get_theme_mod($setting, '');
-    if ($img_id) {
-        $url = wp_get_attachment_url((int) $img_id);
+    $img_id = absint(get_theme_mod($setting, 0));
+    if ($img_id > 0) {
+        $url = wp_get_attachment_url($img_id);
         if ($url) return $url;
     }
     return $default_url;

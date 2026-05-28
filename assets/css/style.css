@@ -416,11 +416,28 @@ a {
   height: 40px;
   width: auto;
   display: block;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-.navbar.scrolled .logo img {
-  content: url("../images/logo-dark.webp");
+/* Default: light logo visible, dark logo hidden */
+.logo .logo-light {
+  opacity: 1;
+}
+
+.logo .logo-dark {
+  display: none;
+  opacity: 0;
+}
+
+/* Scrolled: light logo hidden, dark logo visible */
+.navbar.scrolled .logo .logo-light {
+  display: none;
+  opacity: 0;
+}
+
+.navbar.scrolled .logo .logo-dark {
+  display: block;
+  opacity: 1;
 }
 
 .nav-links a.btn.btn-primary.mandate {

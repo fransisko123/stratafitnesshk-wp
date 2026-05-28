@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks   = document.getElementById('nav-links');
 
   const updateNav = () => {
-    if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const scrolled = window.scrollY > 60;
+    if (navbar) navbar.classList.toggle('scrolled', scrolled);
   };
 
   updateNav();

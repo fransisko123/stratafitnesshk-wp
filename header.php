@@ -24,9 +24,20 @@
   <nav class="navbar navbar-dark" id="main-nav" aria-label="<?php esc_attr_e('Main navigation', 'stratafitness'); ?>">
     <div class="container nav-inner">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="<?php esc_attr_e('Strata Fitness Home', 'stratafitness'); ?>">
+        <!-- Light logo: tampil saat navbar dark/transparan (hero) -->
         <img
-          src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo.webp'); ?>"
-          alt="<?php esc_attr_e('Strata Fitness', 'stratafitness'); ?>"
+          class="logo-light"
+          src="<?php echo esc_url(strata_theme_image('strata_site_logo', '/assets/images/logo.webp')); ?>"
+          alt="<?php echo esc_attr(get_theme_mod('strata_site_logo_alt', 'Strata Fitness')); ?>"
+          width="500"
+          height="154"
+          loading="eager"
+        >
+        <!-- Dark logo: tampil saat navbar scrolled (background terang) -->
+        <img
+          class="logo-dark"
+          src="<?php echo esc_url(strata_theme_image('strata_site_logo_dark', '/assets/images/logo-dark.webp')); ?>"
+          alt="<?php echo esc_attr(get_theme_mod('strata_site_logo_alt', 'Strata Fitness')); ?>"
           width="500"
           height="154"
           loading="eager"
