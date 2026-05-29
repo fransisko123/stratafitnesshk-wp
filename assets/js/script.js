@@ -47,6 +47,70 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─────────────────────────────────────────────────────────────
+     1b. NAVBAR AUTO-COMPACT — shrink when menu items overflow
+     Progressively applies nav--compact → nav--mini.
+     Only kicks in when items genuinely overflow on desktop.
+  ───────────────────────────────────────────────────────────── */
+  const compactNav = () => {
+    if (!navbar || !navLinks) return;
+
+    // Only apply compact on desktop (mobile uses hamburger)
+    if (window.innerWidth <= 768) {
+      navbar.classList.remove('nav--compact', 'nav--mini');
+      return;
+    }
+
+    // Reset compact states to measure natural size
+    navbar.classList.remove('nav--compact', 'nav--mini');
+
+    // Force a reflow so we measure the natural (un-compacted) state
+    void navLinks.offsetWidth;
+
+    const logoEl = navbar.querySelector('.logo');
+    const logoRight = logoEl ? logoEl.getBoundingClientRect().right : 0;
+
+    // Right boundary: use nav-inner right edge (menuToggle is hidden on desktop)
+    const navInner = navbar.querySelector('.nav-inner');
+    const containerRight = navInner ? navInner.getBoundingClientRect().right : window.innerWidth;
+
+    // Available horizontal space for nav-links (with breathing room)
+    const available = containerRight - logoRight - 32;
+
+    // Total natural width of all nav items
+    const navItems = navLinks.querySelectorAll(':scope > a, :scope > li');
+    let totalWidth = 0;
+    navItems.forEach(item => {
+      totalWidth += item.getBoundingClientRect().width;
+    });
+
+    // Add gap (computed from CSS default: 1.5rem = 24px)
+    const gap = navItems.length > 1 ? (navItems.length - 1) * 24 : 0;
+    const naturalWidth = totalWidth + gap;
+
+    if (naturalWidth > available) {
+      // Try compact level 1: smaller gap + letter-spacing, same font-size
+      navbar.classList.add('nav--compact');
+      void navLinks.offsetWidth;
+
+      // Re-measure with compact gap (1rem = 16px)
+      totalWidth = 0;
+      navItems.forEach(item => {
+        totalWidth += item.getBoundingClientRect().width;
+      });
+      const compactGap = navItems.length > 1 ? (navItems.length - 1) * 16 : 0;
+      const compactWidth = totalWidth + compactGap;
+
+      if (compactWidth > available) {
+        // Need mini level: slightly smaller font + tighter gap
+        navbar.classList.add('nav--mini');
+      }
+    }
+  };
+
+  compactNav();
+  window.addEventListener('resize', compactNav);
+
+  /* ─────────────────────────────────────────────────────────────
      2. SCROLL REVEAL & STAGGER
      Observes [data-reveal] and [data-stagger] elements; adds
      .is-visible when they enter the viewport.

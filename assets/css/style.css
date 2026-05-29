@@ -479,8 +479,9 @@ a {
 /* ── Nav Links Container ── */
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* ── Nav Link Base — luxury dim state ── */
@@ -490,15 +491,49 @@ a {
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;         /* luxury: wide tracking */
+  letter-spacing: 0.16em;
   color: rgba(26, 26, 26, 0.5);
   position: relative;
   padding: 0.25rem 0 0.4rem;
+  white-space: nowrap;
   transition:
+    font-size 0.35s ease,
+    letter-spacing 0.35s ease,
     color 0.4s ease,
-    letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, letter-spacing;
+}
+
+/* ── Compact Level 1: tighter gap + letter-spacing, same font-size ── */
+.navbar.nav--compact .nav-links {
+  gap: 1rem;
+}
+
+.navbar.nav--compact .nav-links a:not(.mandate),
+.navbar.nav--compact .nav-links .nav-link:not(.mandate) {
+  letter-spacing: 0.12em;
+}
+
+/* ── Compact Level 2: slightly smaller font + tight gap (8+ items) ── */
+.navbar.nav--mini .nav-links {
+  gap: 0.75rem;
+}
+
+.navbar.nav--mini .nav-links a:not(.mandate),
+.navbar.nav--mini .nav-links .nav-link:not(.mandate) {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+/* Keep hover breathing proportional in compact modes */
+.navbar.nav--compact .nav-links a:not(.mandate):hover,
+.navbar.nav--compact .nav-links .nav-link:not(.mandate):hover {
+  letter-spacing: 0.18em;
+}
+
+.navbar.nav--mini .nav-links a:not(.mandate):hover,
+.navbar.nav--mini .nav-links .nav-link:not(.mandate):hover {
+  letter-spacing: 0.14em;
 }
 
 /* Red gradient glow-line — expands from center on hover */
@@ -526,7 +561,7 @@ a {
 .nav-links a:hover,
 .nav-links .nav-link:hover {
   color: #1a1a1a;
-  letter-spacing: 0.28em;        /* breathing expansion */
+  letter-spacing: 0.24em;
   transform: translateY(-1px);
 }
 
@@ -539,7 +574,7 @@ a {
 .nav-links a[aria-current="page"],
 .nav-links .nav-link[aria-current="page"] {
   color: #1a1a1a;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.24em;
   text-shadow: none;
 }
 
@@ -796,6 +831,11 @@ a {
     display: block;
   }
 
+  .nav-inner {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
   .nav-links {
     display: flex;
     flex-direction: column;
@@ -954,7 +994,13 @@ a {
 .nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+}
+
+@media (min-width: 769px) {
+  .nav-inner {
+    justify-content: center;
+    gap: 4rem;
+  }
 }
 
 /* ── Section header ── */
