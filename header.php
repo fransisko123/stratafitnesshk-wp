@@ -21,7 +21,13 @@
 <body <?php body_class(); ?>>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-dark" id="main-nav" aria-label="<?php esc_attr_e('Main navigation', 'stratafitness'); ?>">
+  <?php
+  // Only use dark (white-text) navbar on pages that have a dark hero background
+  $is_dark_hero = is_front_page()
+      || is_page(array('personal-training', 'remote-coaching', 'nutrition-coaching', 'about'));
+  $navbar_class = $is_dark_hero ? 'navbar navbar-dark' : 'navbar';
+  ?>
+  <nav class="<?php echo esc_attr($navbar_class); ?>" id="main-nav" aria-label="<?php esc_attr_e('Main navigation', 'stratafitness'); ?>">
     <div class="container nav-inner">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="logo" aria-label="<?php esc_attr_e('Strata Fitness Home', 'stratafitness'); ?>">
         <!-- Light logo: tampil saat navbar dark/transparan (hero) -->

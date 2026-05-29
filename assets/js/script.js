@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks   = document.getElementById('nav-links');
 
   const updateNav = () => {
-    const scrolled = window.scrollY > 60;
+    // On dark-hero pages, scrolled only after 60px. On other pages, always scrolled.
+    const isDarkHero = navbar && navbar.classList.contains('navbar-dark');
+    const scrolled = isDarkHero ? window.scrollY > 60 : true;
     if (navbar) navbar.classList.toggle('scrolled', scrolled);
   };
 
